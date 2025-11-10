@@ -1,32 +1,31 @@
 using UnityEngine;
 
 // Plot that can host crops, animals or any placeable item implementing PlotPlaceableBase
-public class Plot : MonoBehaviour
+public class Plot : MonoBehaviour, IFillOnAble
 {
-    private bool isFilled = false;
     private GameObject currentObj;
     private IPlaceable placeableItem;
-    public void FillPlot(GameObject obj)
+    public Vector3 position => transform.position;
+    public bool Isfilled() => currentObj != null && placeableItem != null;
+    public void OnFill(GameObject source)
     {
-        if (isFilled)
+       if (Isfilled())
         {
             Debug.Log("Plot is already filled.");
             return;
         }
-        placeableItem = obj.GetComponent<IPlaceable>();
+        placeableItem = source.GetComponent<IPlaceable>();
         if (placeableItem == null)
         {
             Debug.Log("Object does not implement IPlaceable interface.");
             return;
         }
-        currentObj = Instantiate(obj, transform.position, Quaternion.identity, transform);
+        currentObj = Instantiate(source, transform.position, Quaternion.identity, transform);
         placeableItem.OnPlaced(this);
-        isFilled = true;
     }
-    public bool Isfilled() => isFilled;
-    public void ClearPlot()
+    public void OnEmpty()
     {
-        if (!isFilled)
+         if (!Isfilled())
         {
             Debug.Log("Plot is already empty.");
             return;
@@ -35,7 +34,5 @@ public class Plot : MonoBehaviour
             placeableItem.OnRemoved();
         currentObj = null;
         placeableItem = null;
-        isFilled = false;
-    } 
-
+    }
 }

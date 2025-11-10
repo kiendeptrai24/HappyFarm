@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,18 +9,20 @@ public class DragManager : MonoBehaviour
 {
     public static DragManager Instance { get; private set; }
 
-    [Header("Camera chính dùng cho raycast")]
+    [Header("Camera")]
     public Camera mainCamera;
 
-    [Header("LayerMask cho mặt đất (Author: Ground)")]
+    [Header("LayerMask")]
     public LayerMask groundMask;
+    public LayerMask canShowDataMask;
 
-    [Header("Input Actions (tự động lấy từ PlayerInput)")]
+
+    [Header("Input Actions")]
     PlayerInput playerInput;
     Vector2 mousePos;
     private GameObject currentGhost;
     private GameObject currentPrefab;
-    private Plot currentPlot;
+    private IFillOnAble curPlace;
     private bool isDragging = false;
 
     [SerializeField] private Material ghostMat;
@@ -41,7 +44,23 @@ public class DragManager : MonoBehaviour
     {
         playerInput.Drag.Enable();
         playerInput.Drag.Mouse.canceled += OnClickCanceled;
+        playerInput.Drag.Mouse.performed += ctx => OnClicked(ctx);
         playerInput.Drag.Position.performed += ctx => mousePos = ctx.ReadValue<Vector2>();
+    }
+
+    private void OnClicked(InputAction.CallbackContext ctx)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, canShowDataMask))
+        {
+            FarmEntity entity = hit.collider.GetComponent<FarmEntity>();
+            if (entity != null)
+            {
+                PupupShowData.Instance.SetData(entity);
+                PupupShowData.Instance.Show();
+            }
+        }
     }
 
     private void OnDisable()
@@ -62,43 +81,37 @@ public class DragManager : MonoBehaviour
         SetGhostColor(false);
     }
 
-    public void EndDrag(bool confirmPlacement)
+    public void EndDrag()
     {
         if (!isDragging) return;
-        Debug.Log("End Drag called. Confirm Placement: " + confirmPlacement);
-        Debug.Log("Current Ghost: " + (currentGhost != null ? currentGhost.name : "null"));
-        if (confirmPlacement && currentGhost != null)
-        {
-            DestroyImmediate(currentGhost);
-        }
 
+        Destroy(currentGhost);
         currentGhost = null;
         currentPrefab = null;
-        currentPlot = null;
+        curPlace = null;
         isDragging = false;
     }
 
-    private void Update() {
-        
+    private void Update()
+    {
+
         if (!isDragging || currentGhost == null) return;
 
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask))
         {
-            Plot plot = hit.collider.GetComponent<Plot>();
-
-
+            IFillOnAble plot = hit.collider.GetComponent<IFillOnAble>();
             if (plot != null && !plot.Isfilled())
             {
-                if (plot == currentPlot) return;
-                currentPlot = plot;
-                currentGhost.transform.position = plot.transform.position;
+                if (plot == curPlace) return;
+                curPlace = plot;
+                currentGhost.transform.position = plot.position;
                 SetGhostColor(true);
             }
             else
             {
-                currentPlot = null;
+                curPlace = null;
                 currentGhost.transform.position = hit.point;
                 SetGhostColor(false);
             }
@@ -111,16 +124,13 @@ public class DragManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask))
         {
-            Plot plot = hit.collider.GetComponent<Plot>();
-            if (plot != null && !plot.Isfilled())
+            IFillOnAble obj = hit.collider.GetComponent<IFillOnAble>();
+            if (obj != null && obj.Isfilled() == false)
             {
-                plot.FillPlot(currentPrefab);
-                EndDrag(true);
-                return;
+                obj.OnFill(currentPrefab);
             }
         }
-        EndDrag(false);
-
+        EndDrag();
     }
 
     private void SetGhostColor(bool isValid = true)

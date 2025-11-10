@@ -1,6 +1,6 @@
 public enum PlaceableType {
     None,
-    Crop,
+    Dirt,
     Tree,
     Building,
     Decoration
