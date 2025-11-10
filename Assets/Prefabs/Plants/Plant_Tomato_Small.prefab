@@ -106,8 +106,8 @@ MonoBehaviour:
   data:
     name: Tomato
     growTime: 15
-    timeToHarvest: 1
-    witherDelay: 5
+    timeToHarvest: 5
+    witherDelay: 60
     yieldAmount: 1
     lifeCycles: 40
     price: 5

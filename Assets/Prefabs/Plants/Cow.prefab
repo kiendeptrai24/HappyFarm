@@ -2009,7 +2009,7 @@ MonoBehaviour:
   data:
     name: Cow
     growTime: 30
-    timeToHarvest: 30
+    timeToHarvest: 5
     witherDelay: 60
     yieldAmount: 1
     lifeCycles: 100

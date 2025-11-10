@@ -106,11 +106,13 @@ MonoBehaviour:
   data:
     name: BlueBarry
     growTime: 15
-    timeToHarvest: 15
+    timeToHarvest: 5
     witherDelay: 60
     yieldAmount: 1
     lifeCycles: 40
+    price: 0
   startTime: 0
+  witherStartTime: 0
   matureTree: {fileID: 8971916585849269643, guid: c3568e678d846a349a694e4904eb4247,
     type: 3}
 --- !u!65 &5513535263013428079

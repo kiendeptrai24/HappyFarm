@@ -1,5 +1,6 @@
 
 
+using System;
 using UnityEngine;
 
 public abstract class FarmEntity : MonoBehaviour, IEntity
@@ -13,6 +14,9 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     private MeshFilter meshFilter;
     private bool isMature = false;
     private bool startWither = false;
+
+    public Action OnCanHasvest { get; set; }
+
     protected virtual void Start()
     {
         startTime = Time.time;
@@ -53,9 +57,10 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
                 }
             }
             startWither = true;
+            OnCanHasvest?.Invoke();
         }
 
-        if (IsHarvestable() && startWither == true && data.witherDelay - Time.time - witherStartTime <= 0)
+        if (IsHarvestable() && startWither == true && Time.time - witherStartTime > data.witherDelay)
         {
             OnDead();
         }
@@ -69,9 +74,13 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
 
     public void OnDead()
     {
+        Debug.Log("DSADSADSADA");
         if (dirt != null)
             dirt.OnEmpty();
         Destroy(gameObject);
+    }
+    private void OnDestroy() {
+        Debug.Log("Fsdffagsdsfre");
     }
     protected virtual void ResetTime()
     {

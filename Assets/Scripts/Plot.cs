@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // Plot that can host crops, animals or any placeable item implementing PlotPlaceableBase
@@ -6,6 +7,13 @@ public class Plot : MonoBehaviour, IFillOnAble
     private GameObject currentObj;
     private IPlaceable placeableItem;
     public Vector3 position => transform.position;
+
+    public Action OnFillOnAnble { get; set; }
+    public Action OnFillOnUnable { get; set; }
+
+    private void Start() {
+        OnFillOnAnble?.Invoke();
+    }
     public bool Isfilled() => currentObj != null && placeableItem != null;
     public void OnFill(GameObject source)
     {
@@ -34,5 +42,6 @@ public class Plot : MonoBehaviour, IFillOnAble
             placeableItem.OnRemoved();
         currentObj = null;
         placeableItem = null;
+        OnFillOnAnble?.Invoke();
     }
 }

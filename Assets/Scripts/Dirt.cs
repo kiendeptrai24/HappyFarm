@@ -1,4 +1,5 @@
 
+using System;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -9,14 +10,22 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     public string Name => "Dirt";
     public Vector2 Size => new Vector2(1, 1);
     public Vector3 position => new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
+
+    public Action OnFillOnAnble { get; set; }
+    public Action OnFillOnUnable { get; set; }
+
     public Plot plot;
 
     [Header("Crop Info")]
     public IEntity currentEntity;
     public GameObject cropObj;
+    private void Start() {
+        DetectTask.Instance.AddFillOn(this);
+    }
     public void OnPlaced(Plot tile)
     {
         plot = tile;
+        OnFillOnAnble?.Invoke();
     }
     public void OnRemoved()
     {
@@ -36,10 +45,17 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
             Debug.Log("Object does not implement ICrop interface.");
             return;
         }
+        if (transform.gameObject.scene.rootCount == 0)
+        {
+            Debug.Log(gameObject.name);
+            return;
+        }
+        
         cropObj = Instantiate(source, position, Quaternion.identity, transform);
         entity = cropObj.GetComponent<IEntity>();
         entity.Plant(this);
         currentEntity = entity;
+        OnFillOnUnable?.Invoke();
     }
 
     public void OnEmpty()
@@ -50,6 +66,7 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
             return;
         }
         currentEntity = null;
+        OnFillOnAnble?.Invoke();
     }
 
     public bool Isfilled() => currentEntity != null;
