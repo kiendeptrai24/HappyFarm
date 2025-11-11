@@ -24,7 +24,6 @@ public class TaskManager : MonoBehaviour
     {
         foreach (var dirt in detectTask.fillAbles)
         {
-            Debug.Log("SowSeedTask");
             int random = Random.Range(0, entities.Count);
             GameObject seedEntity = entities[random];
 
@@ -61,7 +60,7 @@ public class TaskManager : MonoBehaviour
             entitiesSet.Add(entity);
 
             var harvestTask = new HarvestTask();
-            harvestTask.Setup(new HarvestTaskData(entity,place.position));
+            harvestTask.Setup(new HarvestTaskData(entity, place.position));
             dirt.OnFillOnAnble += () =>
             {
                 if (missions.Contains(harvestTask))

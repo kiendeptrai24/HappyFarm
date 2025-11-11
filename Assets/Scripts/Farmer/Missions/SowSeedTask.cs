@@ -13,6 +13,8 @@ public class SowSeedTask : IFarmTask<SowSeedTaskData>
 
     public Vector3 position => data.dirt.position;
 
+    public string NameTask => "SowSeedTask";
+
     public void Setup(SowSeedTaskData data)
     {
         this.data = data;
@@ -25,7 +27,7 @@ public class SowSeedTask : IFarmTask<SowSeedTaskData>
         IsStarted = true;
         IsCompleted = false;
         OnStart?.Invoke();
-        Debug.Log($"🌱 Gieo hạt {data.seed} tại ô đất {data.dirt}");
+        Debug.Log($"🌱 Gieo hạt {data.seed} tại ô đất {data.dirt} Task:{NameTask}");
     }
     
     public void Complete(object result = null)

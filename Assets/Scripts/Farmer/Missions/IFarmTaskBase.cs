@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface IFarmTaskBase
 {
+    string NameTask { get; }
     Vector3 position { get; }
     Action OnStart { get; set; }
     Action OnComplete { get; set; }

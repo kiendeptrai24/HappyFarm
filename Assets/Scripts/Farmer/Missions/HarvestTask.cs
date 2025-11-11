@@ -11,11 +11,11 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
     public Action OnStart { get; set; }
     public Action OnComplete { get; set; }
 
+    public string NameTask => "HarvestTask";
+
     public void Setup(HarvestTaskData data)
     {
         this.data = data;
-        if (data.entityToHarvest == null)
-            throw new ArgumentException("HarvestTaskData thiếu CropToHarvest.");
     }
 
     public void Start()
@@ -23,8 +23,7 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
         IsStarted = true;
         IsCompleted = false;
         OnStart?.Invoke();
-        Debug.Log($"🌾 Bắt đầu thu hoạch {data.entityToHarvest}");
-        data.entityToHarvest.Harvest(); // nếu Crop có hàm này
+        Debug.Log($"🌾 Bắt đầu thu hoạch {data.entityToHarvest} Task:{NameTask}");
     }
 
     public void Complete(object result = null)
@@ -42,7 +41,7 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
 
     public void Update()
     {
-        if (data.entityToHarvest.IsHarvestable() == false && !IsCompleted)
+        if (data.entityToHarvest.IsHarvestable() == false && IsCompleted)
             Complete();
     }
 }

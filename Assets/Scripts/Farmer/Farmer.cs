@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Farmer : MonoBehaviour
 {
     private FarmerMovement movement;
-
+    [SerializeField] private Transform startPoint;
     private IFarmTaskBase curMission;
     [SerializeField] private float timeToCompletedMision;
     private float startTimeMission;
@@ -16,13 +16,14 @@ public class Farmer : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<FarmerMovement>();
-
         FarmerManager.Instance.AddFarmer(this);
+        movement.MoveTo(startPoint.position);
+
     }
     public bool IsIdle() => isIdle;
     public void SetTask(IFarmTaskBase mission)
     {
-        movement?.MoveTo(mission.position);
+        movement.MoveTo(mission.position);
         isIdle = false;
         startTimeMission = Time.time;
         isIdleChanged?.Invoke();
@@ -34,6 +35,7 @@ public class Farmer : MonoBehaviour
             curMission = null;
             isIdle = true;
             isIdleChanged?.Invoke();
+            movement.MoveTo(startPoint.position);
         };
     }
     private void Update()
@@ -44,7 +46,6 @@ public class Farmer : MonoBehaviour
             if (Time.time - startTimeMission >= timeToCompletedMision)
             {
                 curMission.Complete();
-                curMission = null;
             }
         }
     }

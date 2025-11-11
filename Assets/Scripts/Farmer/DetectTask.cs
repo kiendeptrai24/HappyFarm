@@ -46,12 +46,12 @@ public class DetectTask : Singleton<DetectTask>
 
             if (!fillOn.Isfilled())
             {
-                Debug.Log("okkkkkkkkkk");
+                Debug.Log("Dirt Is Empty");
                 fillAbles.Add(fillOn);
             }
             else
             {
-                Debug.Log("NotOkkkkkkkkkk");    
+                Debug.Log("Dirt Is Filled");    
                 fillUnables.Add(fillOn);
             }
         }

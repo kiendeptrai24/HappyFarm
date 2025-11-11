@@ -17,6 +17,8 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
 
     public Action OnCanHasvest { get; set; }
 
+    public bool isDead = false;
+
     protected virtual void Start()
     {
         startTime = Time.time;
@@ -37,6 +39,7 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
             witherStartTime = float.MaxValue;
             if (data.lifeCycles <= 0)
             {
+                dirt.OnEmpty();
                 OnDead();
             }
             return data;
@@ -74,13 +77,13 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
 
     public void OnDead()
     {
-        Debug.Log("DSADSADSADA");
+        if(isDead) return;
+            isDead = true;
         if (dirt != null)
             dirt.OnEmpty();
         Destroy(gameObject);
     }
     private void OnDestroy() {
-        Debug.Log("Fsdffagsdsfre");
     }
     protected virtual void ResetTime()
     {
