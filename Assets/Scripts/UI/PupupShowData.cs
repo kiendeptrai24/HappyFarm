@@ -89,7 +89,6 @@ public class PupupShowData : MonoBehaviour
         timeText.text = $"{TimeSpan.FromSeconds(remainingLifeTime):m\\:ss}";
         lifeText.text = $"Life Cycles: {currentEnity.data.lifeCycles}";
         yieldText.text = $"Yield: {currentEnity.data.yieldAmount}";
-        priceText.text = $"Price: {currentEnity.data.price} coins/1 unit";
         witherDelaySlider.value = witherPercent;
         witherDelayText.text = $"{TimeSpan.FromSeconds(remainingWitherTime):m\\:ss}";
     }

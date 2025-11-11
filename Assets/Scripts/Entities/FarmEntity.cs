@@ -12,12 +12,11 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     public float witherStartTime;
     [Header("Mesh Filter")]
     public Mesh matureTree;
-    private MeshFilter meshFilter;
-    private bool isMature = false;
+    public MeshFilter meshFilter;
     private bool startWither = false;
-
     public Action OnCanHasvest { get; set; }
     public Action OnHavested { get; set; }
+    public Action OnDead { get; set; }
 
     public bool isDead = false;
 
@@ -25,13 +24,12 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     {
         startTime = Time.time;
         inventory = FindAnyObjectByType<Inventory>();
-        meshFilter = GetComponent<MeshFilter>();
         witherStartTime = float.MaxValue;
     }
     public void Plant(Dirt dirt)
     {
         this.dirt = dirt;
-
+        this.dirt.dirtData.entityData = data;
     }
     public EntityData Harvest()
     {
@@ -43,8 +41,7 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
             witherStartTime = float.MaxValue;
             if (data.lifeCycles <= 0)
             {
-                dirt.OnEmpty();
-                OnDead();
+                Died();
             }
             inventory.AddFarmProduct(data);
             OnHavested?.Invoke();
@@ -57,39 +54,47 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
         if (IsHarvestable() && startWither == false)
         {
             witherStartTime = Time.time;
-            if (isMature == false)
-            {
-                isMature = true;
-                if (meshFilter != null && meshFilter.mesh != matureTree)
-                {
-                    meshFilter.mesh = matureTree;
-                }
-            }
+            if (data.isMature == false)
+                TreeIsMatrue();
             startWither = true;
             OnCanHasvest?.Invoke();
         }
 
         if (IsHarvestable() && startWither == true && Time.time - witherStartTime > data.witherDelay)
         {
-            OnDead();
+            Died();
         }
+    }
+    private void TreeIsMatrue()
+    {
+        Debug.Log("Tree is mature");
+        data.isMature = true;
+        if (meshFilter != null && meshFilter.mesh != matureTree)
+        {
+            meshFilter.mesh = matureTree;
+        }
+
     }
 
 
     public virtual bool IsHarvestable()
     {
+        if (data == null) return false;
         return Time.time - startTime >= data.timeToHarvest;
     }
 
-    public void OnDead()
+    public void Died()
     {
-        if(isDead) return;
-            isDead = true;
-        if (dirt != null)
-            dirt.OnEmpty();
+        if (isDead) return;
+        isDead = true;
+
+        OnDead?.Invoke();
+
+        data = null;
         Destroy(gameObject);
     }
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
     }
     protected virtual void ResetTime()
     {
@@ -105,5 +110,13 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
             $"Time to Harvest Remaining: {timeRemaining:F1}s"
         );
 
+    }
+
+    public void SetPlantData(EntityData data)
+    {
+        this.data = data;
+        this.dirt.dirtData.entityData = this.data;
+        if (data.isMature)
+            TreeIsMatrue();
     }
 }

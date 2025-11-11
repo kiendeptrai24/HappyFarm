@@ -8,7 +8,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
     public PlotData[,] plotDatas = new PlotData[10, 10];
     public Plot plotPrefab;
     [SerializeField] private Transform point;
-    [SerializeField] private Dirt dirtPrefab;
+    [SerializeField] private GameObject dirtPrefab;
 
     public int rows = 1;
     public int columns = 3;
@@ -46,11 +46,14 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
             {
                 Vector3 plotPosition = startPosition + new Vector3(col * plotSize, 0, row * plotSize);
                 var plot = Instantiate(plotPrefab, plotPosition, Quaternion.identity, point);
+
                 plot.Init(row, col, false);
                 plots.Add(plot);
+
                 farmPlots[row, col] = plot;
                 plotDatas[row, col] = plot.plotData;
-                plot.OnFillOnUnable += (land) =>
+
+                farmPlots[row, col].OnFillOnUnable += (land) =>
                 {
                     plotsToSave.Add(plot.plotData);
                     var fillOn = land.GetComponent<IFillOnAble>();
@@ -124,7 +127,8 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                 // create dirt object
                 if (farmPlots[plotData.row, plotData.col] == null)
                     return;
-                farmPlots[plotData.row, plotData.col].OnFill(dirtPrefab.gameObject);
+                farmPlots[plotData.row, plotData.col].OnFill(dirtPrefab);
+                
                 var dirtObj = farmPlots[plotData.row, plotData.col].currentObj.GetComponent<Dirt>();
                 // add plot data to plotsToSave
                 // create entity object
@@ -141,8 +145,9 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                     }
                     if(entityLoad != null)
                     {
-                        
+
                         dirtObj.OnFill(entityLoad);
+                        dirtObj.currentEntity.SetPlantData(plotData.dirtData.entityData);
                     }
                 }
             }

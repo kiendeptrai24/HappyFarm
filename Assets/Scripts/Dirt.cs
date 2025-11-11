@@ -15,6 +15,7 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     public Action<GameObject> OnFillOnUnable { get; set; }
 
     public Plot plot;
+    public DirtData dirtData;
 
     [Header("Crop Info")]
     public IEntity currentEntity;
@@ -26,13 +27,10 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     public void OnPlaced(Plot tile)
     {
         plot = tile;
+        dirtData = plot.plotData.dirtData;
         OnFillOnAnble?.Invoke();
     }
-    public void OnRemoved()
-    {
-        plot = null;
-    }
-
+    public void OnRemoved() => Destroy(gameObject);
     public void OnFill(GameObject source)
     {
         if (Isfilled())
@@ -57,8 +55,8 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
         entity.Plant(this);
         currentEntity = entity;
         OnFillOnUnable?.Invoke(cropObj);
+        currentEntity.OnDead += OnEmpty;
     }
-
     public void OnEmpty()
     {
         if (currentEntity == null)
@@ -69,7 +67,6 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
         currentEntity = null;
         OnFillOnAnble?.Invoke();
     }
-
     public bool Isfilled() => currentEntity != null;
 
 }

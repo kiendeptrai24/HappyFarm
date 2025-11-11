@@ -105,16 +105,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BlueBarry
   data:
     name: BlueBarry
-    growTime: 15
+    lifeCycles: 40
+    growthTime: 0
     timeToHarvest: 5
     witherDelay: 60
     yieldAmount: 1
-    lifeCycles: 40
-    price: 0
+    isMature: 0
   startTime: 0
   witherStartTime: 0
   matureTree: {fileID: 8971916585849269643, guid: c3568e678d846a349a694e4904eb4247,
     type: 3}
+  meshFilter: {fileID: 3636680849305328661}
+  isDead: 0
 --- !u!65 &5513535263013428079
 BoxCollider:
   m_ObjectHideFlags: 0

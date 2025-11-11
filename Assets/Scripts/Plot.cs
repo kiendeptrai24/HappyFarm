@@ -37,6 +37,7 @@ public class Plot : MonoBehaviour, IFillOnAble
         }
         currentObj = Instantiate(source, transform.position, Quaternion.identity, transform);
 
+        placeableItem = currentObj.GetComponent<IPlaceable>();
         var fillOnDetect = currentObj.GetComponent<IFillOnAble>();
         fillOnDetect.OnFillOnUnable += (source) =>
         {

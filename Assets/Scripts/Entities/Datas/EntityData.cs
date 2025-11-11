@@ -1,6 +1,4 @@
 using Newtonsoft.Json;
-using Unity.VisualScripting;
-using UnityEngine;
 
 
 [System.Serializable]
@@ -8,18 +6,26 @@ public class EntityData
 {
     [JsonProperty] 
     public string name;
-    [JsonIgnore]
     [JsonProperty]
     public int lifeCycles;
+    [JsonProperty]
+    public float growthTime;
+    [JsonProperty]
     public float timeToHarvest;
-    [JsonIgnore]
+    [JsonProperty]
     public float witherDelay;
-    [JsonIgnore]
+    [JsonProperty]
     public int yieldAmount;
-    [JsonIgnore] 
-    public int price;
+    [JsonProperty]
+    public bool isMature;
     public EntityData Clone()
     {
         return (EntityData)this.MemberwiseClone();
     }
+    public EntityData(string name, int lifeCycles)
+    {
+        this.name = name;
+        this.lifeCycles = lifeCycles;
+    }
+    public EntityData(){}
 }
