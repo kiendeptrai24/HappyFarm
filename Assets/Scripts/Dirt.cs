@@ -12,14 +12,15 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     public Vector3 position => new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
 
     public Action OnFillOnAnble { get; set; }
-    public Action OnFillOnUnable { get; set; }
+    public Action<GameObject> OnFillOnUnable { get; set; }
 
     public Plot plot;
 
     [Header("Crop Info")]
     public IEntity currentEntity;
     public GameObject cropObj;
-    private void Start() {
+    private void Start()
+    {
         DetectTask.Instance.AddFillOn(this);
     }
     public void OnPlaced(Plot tile)
@@ -50,12 +51,12 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
             Debug.Log(gameObject.name);
             return;
         }
-        
+
         cropObj = Instantiate(source, position, Quaternion.identity, transform);
         entity = cropObj.GetComponent<IEntity>();
         entity.Plant(this);
         currentEntity = entity;
-        OnFillOnUnable?.Invoke();
+        OnFillOnUnable?.Invoke(cropObj);
     }
 
     public void OnEmpty()
@@ -70,5 +71,5 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     }
 
     public bool Isfilled() => currentEntity != null;
-    
+
 }

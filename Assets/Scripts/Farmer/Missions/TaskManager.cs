@@ -1,4 +1,5 @@
 
+//using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class TaskManager : MonoBehaviour
     public HashSet<IEntity> entitiesSet = new();
     public int inProgressMissionsCount;
     public int completedMissionCount;
+    public System.Action<List<IFarmTaskBase>, List<IFarmTaskBase>> OnTaskChanged;
     private void Awake() {
         detectTask = GetComponent<DetectTask>();
         detectTask.OnRefresh += () =>
@@ -29,7 +31,7 @@ public class TaskManager : MonoBehaviour
 
             var sowTask = new SowSeedTask();
             sowTask.Setup(new SowSeedTaskData(dirt as Dirt, seedEntity));
-            dirt.OnFillOnUnable += () =>
+            dirt.OnFillOnUnable += (_) =>
             {
                 if (missions.Contains(sowTask))
                 {
@@ -51,6 +53,7 @@ public class TaskManager : MonoBehaviour
                 }
             };
             AddTask(sowTask);
+            OnTaskChanged?.Invoke(inProgressMissions, completedMissions);
         }
         foreach (var dirt in detectTask.fillUnables)
         {
@@ -88,6 +91,7 @@ public class TaskManager : MonoBehaviour
                 entity.OnCanHasvest -= () =>
                 {
                     AddTask(harvestTask);
+                    OnTaskChanged?.Invoke(inProgressMissions, completedMissions);
                 };
             };
         }

@@ -24,7 +24,7 @@ public class DetectTask : Singleton<DetectTask>
         {
             Resfesh();
         };
-        fillOn.OnFillOnUnable += () =>
+        fillOn.OnFillOnUnable += (_) =>
         {
             Resfesh();
         };
@@ -45,15 +45,9 @@ public class DetectTask : Singleton<DetectTask>
             if (fillOn == null) continue;
 
             if (!fillOn.Isfilled())
-            {
-                Debug.Log("Dirt Is Empty");
                 fillAbles.Add(fillOn);
-            }
             else
-            {
-                Debug.Log("Dirt Is Filled");    
                 fillUnables.Add(fillOn);
-            }
         }
         fillOnCount = fillOns.Count;
         fillAbleCount = fillAbles.Count;

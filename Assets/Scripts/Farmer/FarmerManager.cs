@@ -1,19 +1,22 @@
 
 
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
-public class FarmerManager : Singleton<FarmerManager>
+public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
 {
     private TaskManager taskManager;
+    [SerializeField] private Farmer farmerPrefab;
+    [SerializeField] private Transform point;
     [SerializeField] private List<Farmer> farmers = new();
     [SerializeField] private List<Farmer> idlefarmers = new();
     [SerializeField] private List<Farmer> workingfarmers = new();
     [SerializeField] private float timeToNextTask = 1;
     private float startTimeNextTask;
+    public System.Action<int, int> OnFarmerChanged;
     private void Awake() {
         taskManager = FindAnyObjectByType<TaskManager>();
+        SaveLoadManager.Instance.RegisterSaveLoadData(this);
     }
     public void AddFarmer(Farmer farmer) {
         farmer.isIdleChanged += () =>
@@ -54,6 +57,29 @@ public class FarmerManager : Singleton<FarmerManager>
                 idlefarmers.Add(farmer);
             else
                 workingfarmers.Add(farmer);
+        }
+        OnFarmerChanged?.Invoke(idlefarmers.Count, workingfarmers.Count);
+    }
+
+    public void Save(GameData gameData)
+    {
+        gameData.farmAmount = farmers.Count;
+    }
+
+    public void Load(GameData gameData)
+    {
+        try
+        {
+            for (int i = 0; i < gameData.farmAmount; i++)
+            {
+                var farmer = Instantiate(farmerPrefab, point.position, Quaternion.identity);
+                farmer.SetUp(point);
+            }
+            
+        }
+        catch (System.Exception ex)
+        {
+            Debug.Log("Error Instantiate Farmer:" + ex.Message);
         }
     }
 }

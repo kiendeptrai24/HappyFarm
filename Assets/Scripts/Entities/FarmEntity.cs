@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class FarmEntity : MonoBehaviour, IEntity
 {
+    private Inventory inventory;
     public EntityData data;
     private Dirt dirt;
     public float startTime;
@@ -16,18 +17,21 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     private bool startWither = false;
 
     public Action OnCanHasvest { get; set; }
+    public Action OnHavested { get; set; }
 
     public bool isDead = false;
 
     protected virtual void Start()
     {
         startTime = Time.time;
+        inventory = FindAnyObjectByType<Inventory>();
         meshFilter = GetComponent<MeshFilter>();
         witherStartTime = float.MaxValue;
     }
     public void Plant(Dirt dirt)
     {
         this.dirt = dirt;
+
     }
     public EntityData Harvest()
     {
@@ -42,6 +46,8 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
                 dirt.OnEmpty();
                 OnDead();
             }
+            inventory.AddFarmProduct(data);
+            OnHavested?.Invoke();
             return data;
         }
         return null;

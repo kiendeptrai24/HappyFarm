@@ -17,8 +17,13 @@ public class Farmer : MonoBehaviour
     {
         movement = GetComponent<FarmerMovement>();
         FarmerManager.Instance.AddFarmer(this);
+        if (startPoint != null)
+            return;
         movement.MoveTo(startPoint.position);
-
+    }
+    public void SetUp(Transform startPoint)
+    {
+        this.startPoint = startPoint;
     }
     public bool IsIdle() => isIdle;
     public void SetTask(IFarmTaskBase mission)

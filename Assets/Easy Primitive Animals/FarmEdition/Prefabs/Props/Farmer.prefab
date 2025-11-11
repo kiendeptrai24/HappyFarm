@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2863601816292614513}
   - component: {fileID: 3656733039061023948}
   - component: {fileID: 2915078355884954287}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 3960544517955069423}
   - component: {fileID: 5702164711442933943}
   - component: {fileID: 4253698098796365529}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pants_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,13 +211,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6486075006030973434}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pitchfork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6486075006030973434
 Transform:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 2571791533739518752}
   - component: {fileID: 2532024626240777113}
   - component: {fileID: 1792849033988071629}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MouthCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 4918397410205456823}
   - component: {fileID: 554262616783802466}
   - component: {fileID: 6645921849462872972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3654322373059822058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 817963881387201225}
   - component: {fileID: 7671820893993005528}
   - component: {fileID: 4535497104948214579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 6645394977678288201}
   - component: {fileID: 6606477147315045311}
   - component: {fileID: 3458395952936059448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 3464616159584433423}
   - component: {fileID: 344232532986431700}
   - component: {fileID: 2033672624621748649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fork (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 7513947248290941924}
   - component: {fileID: 2013072707675773987}
   - component: {fileID: 6589191198132000754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pants_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -862,6 +862,118 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2508977382623068964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8240479385660191112}
+  - component: {fileID: 5667635756794655650}
+  - component: {fileID: 5962850966599028413}
+  - component: {fileID: 7317622547569034463}
+  m_Layer: 8
+  m_Name: Harrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8240479385660191112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508977382623068964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.014872944, y: 0.34074086, z: 0.9398924, w: 0.016635282}
+  m_LocalPosition: {x: -0.674, y: 0.19, z: -0.293}
+  m_LocalScale: {x: 0.92000014, y: 0.92, z: 0.92}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2119630214189441184}
+  m_LocalEulerAnglesHint: {x: -39.794, y: -357.069, z: 176.911}
+--- !u!33 &5667635756794655650
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508977382623068964}
+  m_Mesh: {fileID: -8258719600338813196, guid: c3568e678d846a349a694e4904eb4247, type: 3}
+--- !u!23 &5962850966599028413
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508977382623068964}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 759bda0839684014da802c08b417916d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7317622547569034463
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2508977382623068964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8258719600338813196, guid: c3568e678d846a349a694e4904eb4247, type: 3}
 --- !u!1 &2657630307201717394
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +986,7 @@ GameObject:
   - component: {fileID: 2562673917379684011}
   - component: {fileID: 5001727278405729122}
   - component: {fileID: 1063499592428283045}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -987,7 +1099,7 @@ GameObject:
   - component: {fileID: 481534034021312873}
   - component: {fileID: 1447712725139722516}
   - component: {fileID: 6646907004203172973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fork (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1211,7 @@ GameObject:
   - component: {fileID: 3824701333907323142}
   - component: {fileID: 8447922775710080363}
   - component: {fileID: 5696224533819504240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShoulderStrapL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1189,7 +1301,7 @@ GameObject:
   - component: {fileID: 8427969506548284498}
   - component: {fileID: 5723219823001204009}
   - component: {fileID: 2942958777272260902}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Patch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1301,7 +1413,7 @@ GameObject:
   - component: {fileID: 2227190549343975076}
   - component: {fileID: 2329807953617585392}
   - component: {fileID: 8088066477429257414}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Saucepan_Upper_Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,6 +1491,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3237464013309352280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2119630214189441184}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2119630214189441184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237464013309352280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5282308382973827477}
+  - {fileID: 8240479385660191112}
+  m_Father: {fileID: 1676871466000116289}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3313827998531667540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1536,7 @@ GameObject:
   - component: {fileID: 6346312644469208479}
   - component: {fileID: 7545593688535695630}
   - component: {fileID: 4569500962243747011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fork (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1503,7 +1648,7 @@ GameObject:
   - component: {fileID: 4790775371588416857}
   - component: {fileID: 4329091681000612901}
   - component: {fileID: 7071980451914041672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1592,7 +1737,7 @@ GameObject:
   - component: {fileID: 7053302701217649396}
   - component: {fileID: 433522695343976918}
   - component: {fileID: 408672966156729470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pants_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1826,7 @@ GameObject:
   - component: {fileID: 6892788382617646890}
   - component: {fileID: 3711244178095871512}
   - component: {fileID: 7321306418159223667}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StrapRightBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1770,7 +1915,7 @@ GameObject:
   - component: {fileID: 2642925435283840982}
   - component: {fileID: 65212070369500512}
   - component: {fileID: 3152781670094416046}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bib
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1859,7 +2004,7 @@ GameObject:
   - component: {fileID: 2801005503524637041}
   - component: {fileID: 7246627220863814759}
   - component: {fileID: 4378500935157436390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StrapLeftTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1946,7 +2091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1202822966514431366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Saucepan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1983,7 +2128,7 @@ GameObject:
   - component: {fileID: 1556998035872542422}
   - component: {fileID: 8430629082574274781}
   - component: {fileID: 4498561455346389602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage_Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2073,7 +2218,7 @@ GameObject:
   - component: {fileID: 4706956746925012989}
   - component: {fileID: 9051283154139671045}
   - component: {fileID: 4459727786494893949}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2186,7 +2331,7 @@ GameObject:
   - component: {fileID: 4083062582645192208}
   - component: {fileID: 4037219397055396596}
   - component: {fileID: 8813774851804583107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2298,7 +2443,7 @@ GameObject:
   - component: {fileID: 701700827273935721}
   - component: {fileID: 3020278727093287097}
   - component: {fileID: 2384158224427505685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StrapLeftBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2376,6 +2521,118 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5881689811263788554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5282308382973827477}
+  - component: {fileID: 7432354727951008791}
+  - component: {fileID: 1260747904391009665}
+  - component: {fileID: 6870439488516719632}
+  m_Layer: 8
+  m_Name: WaterCan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5282308382973827477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881689811263788554}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7015574, z: -0, w: -0.71261305}
+  m_LocalPosition: {x: -0.778, y: -0.545, z: 0.03}
+  m_LocalScale: {x: 1.5300001, y: 1.5300001, z: 1.5300001}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2119630214189441184}
+  m_LocalEulerAnglesHint: {x: 0, y: -89.104, z: 0}
+--- !u!33 &7432354727951008791
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881689811263788554}
+  m_Mesh: {fileID: 3452129891811701434, guid: c3568e678d846a349a694e4904eb4247, type: 3}
+--- !u!23 &1260747904391009665
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881689811263788554}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 759bda0839684014da802c08b417916d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6870439488516719632
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5881689811263788554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3452129891811701434, guid: c3568e678d846a349a694e4904eb4247, type: 3}
 --- !u!1 &6009844525779014401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,7 +2642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3214790952399214551}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2423,7 +2680,7 @@ GameObject:
   - component: {fileID: 1940949279859311771}
   - component: {fileID: 3893977548779013318}
   - component: {fileID: 6584542130361986835}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2513,7 +2770,7 @@ GameObject:
   - component: {fileID: 3431057184375698091}
   - component: {fileID: 5306635541135432681}
   - component: {fileID: 6677428744273361682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fork (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2626,7 +2883,7 @@ GameObject:
   - component: {fileID: 1913759109089178822}
   - component: {fileID: 4634478669285235331}
   - component: {fileID: 3972480967077020202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2736,7 +2993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1676871466000116289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Specifics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2770,6 +3027,7 @@ Transform:
   - {fileID: 1940949279859311771}
   - {fileID: 2642925435283840982}
   - {fileID: 6486075006030973434}
+  - {fileID: 2119630214189441184}
   m_Father: {fileID: 6879506263190147735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6463937182069961004
@@ -2784,7 +3042,7 @@ GameObject:
   - component: {fileID: 8584974454847506361}
   - component: {fileID: 3112423266623458953}
   - component: {fileID: 5868276579633186501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2896,7 +3154,7 @@ GameObject:
   - component: {fileID: 605526919169418357}
   - component: {fileID: 8746474181850194147}
   - component: {fileID: 25500869795069309}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2985,7 +3243,7 @@ GameObject:
   - component: {fileID: 1465961175532860438}
   - component: {fileID: 8234108024196460908}
   - component: {fileID: 6295940922573620806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShoulderStrapR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3074,7 +3332,7 @@ GameObject:
   - component: {fileID: 7276822907180984243}
   - component: {fileID: 8320153089974042406}
   - component: {fileID: 9177414756518123671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3163,7 +3421,7 @@ GameObject:
   - component: {fileID: 4846837807843109903}
   - component: {fileID: 785631391575947554}
   - component: {fileID: 1111088528173720255}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3252,7 +3510,7 @@ GameObject:
   - component: {fileID: 4328174936452032123}
   - component: {fileID: 5103562195129323821}
   - component: {fileID: 3395046320943193578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3342,7 +3600,7 @@ GameObject:
   - component: {fileID: 5499813197970734873}
   - component: {fileID: 2043376150939555747}
   - component: {fileID: 7029716562127667968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3455,7 +3713,7 @@ GameObject:
   - component: {fileID: 7792036439777757568}
   - component: {fileID: 4034207657502910475}
   - component: {fileID: 4135462365154531345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3568,7 +3826,7 @@ GameObject:
   - component: {fileID: 2296676028615537946}
   - component: {fileID: 1476105665309178872}
   - component: {fileID: 550201692764450277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3681,7 +3939,7 @@ GameObject:
   - component: {fileID: 5984969150994262636}
   - component: {fileID: 6327343066063951922}
   - component: {fileID: 5818380859360357193}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3791,7 +4049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7042308558900325557}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EyePatch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3826,7 +4084,7 @@ GameObject:
   - component: {fileID: 7745261729039539589}
   - component: {fileID: 7911250726728615176}
   - component: {fileID: 364352851855188036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Saucepan_Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3915,7 +4173,7 @@ GameObject:
   - component: {fileID: 2829035222288438734}
   - component: {fileID: 2919152010789367875}
   - component: {fileID: 7880599398215142030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StrapRightTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4005,7 +4263,7 @@ GameObject:
   - component: {fileID: 5359301132181954529}
   - component: {fileID: 6079602006588696506}
   - component: {fileID: 6120570968395288734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bandage (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4116,7 +4374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6879506263190147735}
   - component: {fileID: 7048624941192557948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BaseCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4176,7 +4434,7 @@ GameObject:
   - component: {fileID: 3279798088438877799}
   - component: {fileID: 8894144165638487291}
   - component: {fileID: 2115668668527763939}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Saucepan_Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4263,7 +4521,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8794032723783023229}
-  m_Layer: 0
+  - component: {fileID: 79716616379008138}
+  - component: {fileID: 6058337018979973490}
+  - component: {fileID: 4686930084747890027}
+  m_Layer: 8
   m_Name: Farmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4286,3 +4547,52 @@ Transform:
   - {fileID: 6879506263190147735}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!195 &79716616379008138
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806145551292872681}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
+--- !u!114 &6058337018979973490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806145551292872681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14995a7485e9a9d4baa2c3c27ec913a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Farmer
+  startPoint: {fileID: 0}
+  timeToCompletedMision: 10
+--- !u!114 &4686930084747890027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806145551292872681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362c4511b58837b47a2c883d9c93fc78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FarmerMovement
+  moveSpeed: 3.5
