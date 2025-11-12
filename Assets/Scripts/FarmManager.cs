@@ -26,7 +26,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
     [SerializeField] private List<IFillOnAble> vacantplots = new();
 
     [Header("Planted info")]
-    [SerializeField] private List<FarmEntity> plantedEntities = new();
+    [SerializeField] public List<FarmEntity> plantedEntities = new();
 
     public Action<List<IFillOnAble>, List<IFillOnAble>> OnFarmChanged;
 
@@ -160,7 +160,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                     GameObject entityLoad = null;
                     foreach (var entity in baseFarmEntities)
                     {
-                        if (entity.data != null && entity.data.name == plotData.dirtData.nameOfEntiy)
+                        if (entity.data != null && entity.data.type == plotData.dirtData.type)
                         {
                             entityLoad = entity.gameObject;
                             break;

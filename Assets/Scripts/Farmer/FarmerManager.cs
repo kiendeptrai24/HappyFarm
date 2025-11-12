@@ -11,7 +11,7 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
     [SerializeField] private List<Farmer> farmers = new();
     [SerializeField] private List<Farmer> idlefarmers = new();
     [SerializeField] private List<Farmer> workingfarmers = new();
-    [SerializeField] private float timeToNextTask = 1;
+    [SerializeField] private float timeToNextTask = .01f;
     private float startTimeNextTask;
     public System.Action<int, int> OnFarmerChanged;
     private void Awake() {
@@ -31,7 +31,7 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
         farmers.Remove(farmer);
     }
     private void Update() {
-        if (timeToNextTask <= Time.time - startTimeNextTask)
+        if (timeToNextTask < Time.time - startTimeNextTask)
         {
             AssignTaskToFarmer();
             startTimeNextTask = Time.time;
@@ -51,6 +51,7 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
     {
         idlefarmers.Clear();
         workingfarmers.Clear();
+
         foreach (var farmer in farmers)
         {
             if (farmer.IsIdle())

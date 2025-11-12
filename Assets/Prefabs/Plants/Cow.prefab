@@ -2008,14 +2008,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cow
   data:
     name: Cow
+    type: 0
+    seed: 0
     lifeCycles: 100
     growthTime: 0
     timeToHarvest: 5
-    baseTimeToHarvest: 5
+    baseGrowthTime: 0
+    baseTimeToHarvest: 0.1
     witherDelay: 60
     yieldAmount: 1
     baseYieldAmount: 1
+    quantity: 0
+    price: 15
     isMature: 0
+    immortal: 0
   startTime: 0
   witherStartTime: 0
   matureTree: {fileID: 0}

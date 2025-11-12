@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -9,11 +8,16 @@ public class EntityData
     [JsonProperty]
     public string name;
     [JsonProperty]
+    public ProductSaleAble type;
+    [JsonProperty]
+    public ProductBuyAble seed;
+    [JsonProperty]
     public int lifeCycles;
     [JsonProperty]
     public float growthTime;
-    [JsonProperty]
     public float timeToHarvest;
+    [JsonProperty]
+    public float baseGrowthTime;
     [JsonProperty]
     public float baseTimeToHarvest;
     [JsonProperty]
@@ -23,10 +27,18 @@ public class EntityData
     [JsonProperty]
     public int baseYieldAmount = 1;
     [JsonProperty]
+    public int quantity;
+    [JsonProperty]
+    public int price;
+    [JsonProperty]
     public bool isMature;
+    [JsonProperty]
+    public bool immortal = false;
     public EntityData Clone()
     {
-        return (EntityData)this.MemberwiseClone();
+        var clone = (EntityData)this.MemberwiseClone();
+        clone.timeToHarvest = baseTimeToHarvest * 60;
+        return clone;
     }
     public EntityData(string name, int lifeCycles)
     {
@@ -35,7 +47,7 @@ public class EntityData
     }
     public void ApplyUpgrade(FarmUpgradeData upgradeData)
     {
-        timeToHarvest = baseTimeToHarvest;
+        timeToHarvest = baseTimeToHarvest * 60;
         timeToHarvest *= upgradeData.harvestSpeedMultiplier;
 
         yieldAmount = baseYieldAmount;

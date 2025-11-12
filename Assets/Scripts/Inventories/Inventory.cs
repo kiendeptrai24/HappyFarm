@@ -1,5 +1,4 @@
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ public class Inventory : MonoBehaviour, ISaveLoadData
 {
     [Header("Inventory Info")]
     public long coins = 0;
-    public FarmUpgradeData farmUpgradeData = new();
+    public FarmUpgradeData farmUpgradeData;
 
     [Header("Farm Product Info")]
     public List<FarmProductData> farmProductDatas = new();
@@ -15,14 +14,26 @@ public class Inventory : MonoBehaviour, ISaveLoadData
     private Dictionary<string, SeedData> seedDataBase = new();
     private Dictionary<string, FarmProductData> farmProductDataBase = new();
 
-    public Action<long,int> OnCoinsAndLevelUpdate;
-    public Action<List<FarmProductData>> OnProductDataUpdate;
-    public Action<List<SeedData>> OnSeedDataUpdate;
+    public System.Action<long, int> OnCoinsAndLevelUpdate;
+    public System.Action<List<FarmProductData>> OnProductDataUpdate;
+    public System.Action<List<SeedData>> OnSeedDataUpdate;
+    [Header("Seed data prefabs")]
+    public List<GameObject> entities = new();
+    public Dictionary<string, FarmEntity> farmEntities = new();
 
 
     private void Awake()
     {
         SaveLoadManager.Instance.RegisterSaveLoadData(this);
+        FarmManager farmManager = FindAnyObjectByType<FarmManager>();
+        farmUpgradeData = new FarmUpgradeData(farmManager);
+        foreach (var entity in entities)
+        {
+            var obj = entity.GetComponent<FarmEntity>();
+
+            farmEntities.Add(obj.data.seed.ToString(), obj);
+        }
+
     }
     private void Start()
     {
@@ -31,42 +42,115 @@ public class Inventory : MonoBehaviour, ISaveLoadData
         OnProductDataUpdate?.Invoke(farmProductDatas);
         OnSeedDataUpdate?.Invoke(seedDatas);
     }
-    public void AddFarmProduct(EntityData entityData)
+    public GameObject GetRandomSeed()
     {
-        if (farmProductDataBase.TryGetValue(entityData.name, out var productData))
+        if (seedDatas == null || seedDatas.Count == 0)
+            return null;
+
+        int randomIndex = Random.Range(0, seedDatas.Count);
+        SeedData seedData = seedDatas[randomIndex];
+
+        if (seedData == null)
+            return null;
+
+        if (!farmEntities.TryGetValue(seedData.type.ToString(), out var entity) || entity == null)
+            return null;
+
+        if (seedData.quantity > 0)
         {
-            productData.yieldAmount += entityData.yieldAmount;
-            OnProductDataUpdate?.Invoke(farmProductDatas);
+            seedData.quantity--;
         }
+        else
+        {
+            seedDatas.RemoveAt(randomIndex);
+            seedDataBase.Remove(seedData.type.ToString());
+        }
+
+        return entity.gameObject;
     }
+
     public void AddSeed(SeedData seedData)
     {
-        if (seedDataBase.ContainsKey(seedData.type.ToString()) == false)
+        if (seedDataBase.TryGetValue(seedData.type.ToString(), out var seed))
+        {
+            //logic add seed
+            seed.quantity += seedData.quantity;
+            coins -= seedData.price * seedData.quantity;
+
+            //call back UI
+            OnSeedDataUpdate?.Invoke(seedDatas);
+            OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
+        }
+        else
         {
             //logic create seed when not have
             seedDatas.Add(seedData);
             seedDataBase.Add(seedData.type.ToString(), seedData);
-            coins -= seedData.price * seedData.yieldAmount;
-
-            //call back UI
-            OnSeedDataUpdate?.Invoke(seedDatas);
-            OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
-            return;
-        }
-        if (seedDataBase.TryGetValue(seedData.type.ToString(), out var seed))
-        {
-            //logic add seed
-            coins -= seedData.price * seedData.yieldAmount;
-            seed.yieldAmount += seedData.yieldAmount;
+            coins -= seedData.price * seedData.quantity;
 
             //call back UI
             OnSeedDataUpdate?.Invoke(seedDatas);
             OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
         }
     }
-    public void RemoveSeed(FarmProductData farmProduct)
+    public void RemoveSeed(SeedData seedData)
     {
-        
+        if (farmProductDataBase.TryGetValue(seedData.type.ToString(), out var seed))
+        {
+            if (seedData.quantity > seed.quantity)
+            {
+                Debug.Log("Not enough seeds");
+                return;
+            }
+            seed.quantity -= seedData.quantity;
+        }
+    }
+    public void AddFarmProduct(EntityData entityData)
+    {
+        if (farmProductDataBase.TryGetValue(entityData.type.ToString(), out var productData))
+        {
+            productData.quantity += entityData.yieldAmount;
+            productData.price = entityData.price;
+            productData.yieldAmount = entityData.yieldAmount;
+            OnProductDataUpdate?.Invoke(farmProductDatas);
+        }
+        else
+        {
+            FarmProductData newProductData = new FarmProductData();
+            newProductData.type = entityData.type;
+            newProductData.quantity = 1;
+            newProductData.price = entityData.price;
+            newProductData.yieldAmount = entityData.yieldAmount;
+            farmProductDatas.Add(newProductData);
+            farmProductDataBase.Add(newProductData.type.ToString(), newProductData);
+        }
+    }
+    public void RemoveFarmProduct(FarmProductData farmProduct)
+    {
+        if (farmProductDataBase.TryGetValue(farmProduct.type.ToString(), out var productData))
+        {
+            int amountToRemove = productData.quantity - farmProduct.quantity;
+
+            if (amountToRemove <= 0)
+            {
+                farmProductDataBase.Remove(farmProduct.type.ToString());
+                farmProductDatas.Remove(productData);
+                coins += farmProduct.price * farmProduct.quantity;
+            }
+            else
+            {
+                productData.quantity = amountToRemove;
+                coins += farmProduct.price * farmProduct.quantity;
+            }
+            OnProductDataUpdate?.Invoke(farmProductDatas);
+        }
+    }
+    public void UpgradeFarm(int countLevel = 1)
+    {
+        if (farmUpgradeData.Upgrade(ref coins, countLevel))
+        {
+            OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
+        }
     }
     public void Load(GameData gameData)
     {
@@ -77,7 +161,7 @@ public class Inventory : MonoBehaviour, ISaveLoadData
             farmUpgradeData.level = gameData.level;
             foreach (var productData in gameData.farmProductDatas)
             {
-                farmProductDataBase.Add(productData.name, productData);
+                farmProductDataBase.Add(productData.type.ToString(), productData);
                 farmProductDatas.Add(productData);
             }
             foreach (var seedData in gameData.seedDatas)
@@ -87,10 +171,11 @@ public class Inventory : MonoBehaviour, ISaveLoadData
             }
 
             // call back ui
-            OnProductDataUpdate?.Invoke(farmProductDatas);
             OnSeedDataUpdate?.Invoke(seedDatas);
+            OnProductDataUpdate?.Invoke(farmProductDatas);
+            OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
             Debug.Log("Inventory error Load: " + ex.Message);
         }
@@ -106,7 +191,7 @@ public class Inventory : MonoBehaviour, ISaveLoadData
             gameData.farmProductDatas = farmProductDatas;
             gameData.seedDatas = seedDatas;
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
             Debug.Log("Inventory error Save: " + ex.Message);
         }

@@ -36,7 +36,6 @@ public class Farmer : MonoBehaviour
         curMission.Start();
         curMission.OnComplete += () =>
         {
-            Unsubscribe();
             curMission = null;
             isIdle = true;
             isIdleChanged?.Invoke();
@@ -53,14 +52,6 @@ public class Farmer : MonoBehaviour
                 curMission.Complete();
             }
         }
-    }
-    private void Unsubscribe()
-    {
-        if (curMission == null) return;
-        curMission.OnComplete -= () =>
-        {
-            curMission = null;
-        };
     }
 
 }

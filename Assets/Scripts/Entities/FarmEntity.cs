@@ -23,8 +23,8 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     protected virtual void Start()
     {
         startTime = Time.time;
-        inventory = FindAnyObjectByType<Inventory>();
         witherStartTime = float.MaxValue;
+        inventory = FindAnyObjectByType<Inventory>();
         data.ApplyUpgrade(inventory.farmUpgradeData);
     }
     public void Plant(Dirt dirt)
@@ -86,6 +86,7 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
 
     public void Died()
     {
+        if (data.immortal == true) return;
         if (isDead) return;
         isDead = true;
 

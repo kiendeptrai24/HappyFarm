@@ -105,14 +105,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TomatoPlant
   data:
     name: Tomato
+    type: 1
+    seed: 1
     lifeCycles: 40
     growthTime: 0
     timeToHarvest: 5
-    baseTimeToHarvest: 5
+    baseGrowthTime: 0
+    baseTimeToHarvest: 0.1
     witherDelay: 60
     yieldAmount: 1
     baseYieldAmount: 1
+    quantity: 0
+    price: 5
     isMature: 0
+    immortal: 0
   startTime: 0
   witherStartTime: 0
   matureTree: {fileID: -1223040253640646196, guid: c3568e678d846a349a694e4904eb4247,

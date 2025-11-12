@@ -4,9 +4,10 @@ using Newtonsoft.Json;
 [Serializable]
 public class FarmProductData
 {
-    public string name;
+    public ProductSaleAble type;
     public int yieldAmount;
     public int price;
+    public int quantity;
     public FarmProductData Clone()
     {
         return (FarmProductData)this.MemberwiseClone();

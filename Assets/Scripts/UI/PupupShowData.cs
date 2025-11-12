@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PupupShowData : MonoBehaviour
 {
+    private Inventory inventory;
     public static PupupShowData Instance { get; private set; }
     [SerializeField] private GameObject popupPrefab;
     [SerializeField] private TextMeshProUGUI nameText;
@@ -27,6 +28,7 @@ public class PupupShowData : MonoBehaviour
             return;
         }
         Instance = this;
+        inventory = FindAnyObjectByType<Inventory>();
     }
     private void Start()
     {
@@ -38,8 +40,7 @@ public class PupupShowData : MonoBehaviour
                 var data = currentEnity.Harvest();
                 if (data != null)
                 {
-                    //InGameUIManager.Instance.AddToInventory(data, data.yieldAmount);
-                    Debug.Log($"Harvested {data.yieldAmount} of {data.name}");
+                    inventory.AddFarmProduct(data);
                     Hide();
                 }
             }

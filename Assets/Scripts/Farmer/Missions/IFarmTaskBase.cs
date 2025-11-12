@@ -15,5 +15,5 @@ public interface IFarmTaskBase
     void Start();
     void Update();
     void Complete(object result = null);
-    void DisplayInfo();
+    string DisplayInfo();
 }

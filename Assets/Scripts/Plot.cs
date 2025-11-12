@@ -46,13 +46,13 @@ public class Plot : MonoBehaviour, IFillOnAble
             {
                 Debug.Log(entity.data.name);
                 plotData.dirtData.hasEntity = true;
-                plotData.dirtData.nameOfEntiy = entity.data.name;
+                plotData.dirtData.type = entity.data.type;
             }
             else
             {
                 Debug.Log(entity.data.name);
                 plotData.dirtData.hasEntity = false;
-                plotData.dirtData.nameOfEntiy = null;
+                plotData.dirtData.type = ProductSaleAble.None;
             }
 
         };

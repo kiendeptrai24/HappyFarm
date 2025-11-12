@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SowSeedTaskData
@@ -7,6 +8,7 @@ public class SowSeedTaskData
         this.dirt = dirt;
         this.seed = seed;
     }
+    public DateTime startTime = DateTime.Now;
     public Dirt dirt;
     public GameObject seed;
 }

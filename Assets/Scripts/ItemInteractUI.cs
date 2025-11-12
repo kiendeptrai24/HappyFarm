@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,9 +13,8 @@ public class ItemInteractUI : MonoBehaviour,
     private Inventory inventory;
     [Header("Item Info")]
     public ShopItemData itemData;
-    public int itemAmountExisted;
-    public int itemAmount;
-    public int itemPrice;
+    public ShopItemSaleData itemSaleData;
+    public ShopItemType shopItemType;
     [Header("Item Component")]
     public Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemHas;
@@ -23,6 +24,8 @@ public class ItemInteractUI : MonoBehaviour,
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector3 startPosition;
+    private bool isEndDrag = false;
+
 
     private void Awake()
     {
@@ -30,32 +33,55 @@ public class ItemInteractUI : MonoBehaviour,
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvas = GetComponentInParent<Canvas>();
-        if (itemAmountExisted > 0)
-            itemHas.text = $"Exists: {itemAmountExisted}$";
-        else
-            itemHas.text = $"{itemPrice}$/x{itemAmount}";
+
+        inventory.OnSeedDataUpdate += seeds =>
+        {
+            UpdateItemUI(seeds);
+        };
+        inventory.OnProductDataUpdate += products =>
+        {
+            UpdateDataSale(products);
+        };
+        UpdateItemUI(inventory.seedDatas);
+        UpdateDataSale(inventory.farmProductDatas);
+    }
+
+    private void UpdateDataSale(List<FarmProductData> products)
+    {
+        foreach (var product in products)
+        {
+            if (itemSaleData.type == product.type)
+            {
+                itemSaleData.quality = product.quantity;
+                itemSaleData.price = product.price;
+            }
+        }
+    }
+
+    private void UpdateItemUI(System.Collections.Generic.List<SeedData> seeds)
+    {
+        foreach (var seed in seeds)
+        {
+            if (itemData.product == seed.type)
+            {
+                itemData.quality = seed.quantity;
+                if (itemData.quality > 0)
+                {
+                    itemHas.text = $"x{itemData.quality}";
+                }
+                else
+                {
+                    itemHas.text = $"1/x{itemData.price}";
+
+                }
+            }
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         startPosition = rectTransform.position;
-        Popup.Show_Static(itemData.name, itemData.input, itemData.validCharacters, itemData.characterLimit,
-         delegate(){}
-         , (value,log) =>
-        {
-            if (itemAmount * itemData.price < inventory.coins)
-            {
-                int itemAmount = int.Parse(value);
-                Shop.Instance.Buy(itemData, itemAmount);
-                log.text = "";
-                Popup.HideStatic();
-            }
-            else
-            {
-                log.text = "You Dont have enough!";
-            }
-
-        });
+        isEndDrag = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -68,6 +94,7 @@ public class ItemInteractUI : MonoBehaviour,
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        isEndDrag = true;
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -79,16 +106,59 @@ public class ItemInteractUI : MonoBehaviour,
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        // có thể để trống
+        if (isEndDrag) return;
+
+        Popup.Show_Static(itemData.name, itemData.input, itemData.validCharacters, itemData.characterLimit,
+         delegate () { }
+         , (value, log) =>
+        {
+            int itemAmount = 1;
+            try
+            {
+                itemAmount = int.Parse(value);
+            }
+            catch (System.Exception)
+            {
+            }
+
+            if (shopItemType == ShopItemType.EquipmentUpgrade)
+            {
+                inventory.UpgradeFarm(itemAmount);
+                return;
+            }
+            if (Popup.instance.IsSale())
+                LogicSale(value, log, itemAmount);
+            else
+                LogicBuy(value, log, itemAmount);
+        });
     }
 
-    public bool CanPurchase(long coins, int quatily)
+    private void LogicBuy(string value, TextMeshProUGUI log, int itemAmount)
     {
-        throw new System.NotImplementedException();
+        if (itemAmount * itemData.price < inventory.coins)
+        {
+            Shop.Instance.Buy(itemData, itemAmount);
+            log.text = "";
+            Popup.HideStatic();
+        }
+        else
+        {
+            log.text = "You Dont have enough!";
+        }
     }
 
-    public void OnPurchase(int quality)
+    private void LogicSale(string value, TextMeshProUGUI log, int itemAmount)
     {
-        throw new System.NotImplementedException();
+        Debug.Log(itemAmount + " " + itemSaleData.quality);
+        if (itemAmount < itemSaleData.quality)
+        {
+            Shop.Instance.Sell(itemSaleData, itemAmount);
+            log.text = "";
+            Popup.HideStatic();
+        }
+        else
+        {
+            log.text = "You Dont have enough product to buy!";
+        }
     }
 }

@@ -5,15 +5,19 @@ public enum ProductBuyAble
     Cow,
     Tomato,
     Bluebarry,
-    Dirt
+    Dirt,
+    Farmer,
+    None
+
 
 }
 public enum ProductSaleAble
 {
-    CowSMilk,
-    TomatoSeed,
+    CowMilk,
+    Tomato,
     Bluebarry,
-    Strawberry
+    Strawberry,
+    None
 
 }
 public class Shop : Singleton<Shop>
@@ -24,7 +28,9 @@ public class Shop : Singleton<Shop>
     {
         public ProductBuyAble product;
         public string name;
+        public int quality;
         public int price;
+        public int yieldAmount;
         public string input = "Input in here >>>";
         public string description = "";
         public string validCharacters = "0123456789";
@@ -33,13 +39,13 @@ public class Shop : Singleton<Shop>
     [System.Serializable]
     public class ShopItemSaleData
     {
-        public ProductSaleAble product;
-        public string name;
+        public ProductSaleAble type;
         public int price;
-        public int amount;
+        public int quality;
     }
-    
-    private void Awake() {
+
+    private void Awake()
+    {
         inventory = FindAnyObjectByType<Inventory>();
     }
     public List<ShopItemData> buyableItems;
@@ -54,10 +60,11 @@ public class Shop : Singleton<Shop>
             SeedData seedData = new SeedData();
             seedData.name = item.name;
             seedData.price = item.price;
-            seedData.yieldAmount = quality;
+            seedData.yieldAmount = item.yieldAmount;
+            seedData.quantity = quality;
             seedData.type = item.product;
             inventory.AddSeed(seedData);
-            Debug.Log($"💰 Mua {item.product} thành công, còn {inventory.coins} vàng");
+            Debug.Log($"💰 Mua {item.product} thành công với số lượng {seedData.quantity}, còn {inventory.coins} vàng");
         }
         else
         {
@@ -66,20 +73,20 @@ public class Shop : Singleton<Shop>
     }
 
     // Bán item
-    public void Sell(ProductSaleAble product)
+    public void Sell(ShopItemSaleData sale, int quality)
     {
-        // if (!inventory.HasItem(product.ToString(), 1))
-        // {
-        //     Debug.Log("❌ Không có item để bán!");
-        //     return;
-        // }
+        var item = saleableItems.Find(x => x.type == sale.type);
+        if (item == null)
+        {
+            Debug.Log("❌ Không tìm thấy sản phẩm để bán!");
+            return;
+        }
 
-        // var item = saleableItems.Find(x => x.product.ToString() == product.ToString());
-        // if (item == null) return;
-
-        // inventory.RemoveItem(product.ToString(), 1);
-        // playerCoins += item.price;
-        // Debug.Log($"💰 Bán {item.name} thành công, hiện có {playerCoins} vàng");
+        FarmProductData farmProductData = new FarmProductData();
+        farmProductData.type = item.type;
+        farmProductData.price = item.price;
+        farmProductData.quantity = quality;
+        inventory.RemoveFarmProduct(farmProductData);
     }
 
 

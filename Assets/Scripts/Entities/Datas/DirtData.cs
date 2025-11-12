@@ -5,19 +5,18 @@ using Newtonsoft.Json;
 [Serializable]
 public class DirtData
 {
-    [JsonProperty] public string nameOfEntiy;
+    [JsonProperty] public ProductSaleAble type;
     [JsonProperty] public bool hasEntity;
     [JsonProperty] public EntityData entityData;
 
     public DirtData()
     {
-        nameOfEntiy = null;
         hasEntity = false;
         entityData = new EntityData();
     }
-    public DirtData(string nameOfEntiy, bool hasEntity)
+    public DirtData(ProductSaleAble type, bool hasEntity)
     {
-        this.nameOfEntiy = nameOfEntiy;
+        this.type = type;
         this.hasEntity = hasEntity;
     }
 
@@ -30,7 +29,7 @@ public class DirtData
 
     public DirtData Clone()
     {
-        var clone = new DirtData(nameOfEntiy, hasEntity);
+        var clone = new DirtData(type, hasEntity);
         clone.entityData = entityData?.Clone();
         return clone;
     }

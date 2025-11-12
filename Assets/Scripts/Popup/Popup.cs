@@ -4,16 +4,17 @@ using TMPro;
 using System.Linq;
 using UnityEngine.UI;
 
-
 public class Popup : MonoBehaviour {
 
-    private static Popup instance;
+    public static Popup instance;
     private Button okBtn;
     private Button cancelBtn;
     private TextMeshProUGUI titleText;
     private TextMeshProUGUI logText;
     private TMP_InputField inputField;
 
+    [HideInInspector] private Toggle saleOrBuy;
+    [HideInInspector] private TextMeshProUGUI saleOrBuyText;
 
     private void Awake()
     {
@@ -25,12 +26,25 @@ public class Popup : MonoBehaviour {
         cancelBtn = GetComponentsInChildren<Button>().FirstOrDefault(btn => btn.gameObject.name == "cancelBtn");
         titleText = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(tmg => tmg.gameObject.name == "titleText");
         logText = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(tmg => tmg.gameObject.name == "logText");
+        saleOrBuyText = GetComponentsInChildren<TextMeshProUGUI>().FirstOrDefault(input => input.gameObject.name == "saleOrBuyText");
         inputField = GetComponentsInChildren<TMP_InputField>().FirstOrDefault(input => input.gameObject.name == "inputField");
-
+        saleOrBuy = GetComponentsInChildren<Toggle>().FirstOrDefault(input => input.gameObject.name == "saleOrBuy");
+        saleOrBuy.onValueChanged.AddListener((active) =>
+        {
+            saleOrBuyText.text = active ? "Sale" : "Buy";
+        });
         Hide();
         transform.SetAsLastSibling();
     }
-
+    public bool IsSale()
+    {
+        return saleOrBuy.isOn == true;
+    }
+    private void OnEnable()
+    {
+        saleOrBuy.isOn = false;
+    }
+    
     private void Start() {
        
     }
@@ -41,13 +55,14 @@ public class Popup : MonoBehaviour {
         titleText.text = titleString;
 
         inputField.characterLimit = characterLimit;
-        inputField.placeholder.GetComponent<TextMeshProUGUI>().text = "Input in here >>>";
+        inputField.placeholder.GetComponent<TextMeshProUGUI>().text = inputString;
         inputField.onValidateInput = (string text, int charIndex, char addedChar) => {
             return ValidateChar(validCharacters, addedChar);
         };
 
-        inputField.text = inputString;
         inputField.Select();
+        okBtn.onClick.RemoveAllListeners();
+        cancelBtn.onClick.RemoveAllListeners();
         okBtn.onClick.AddListener(() => {
             onOk(inputField.text,logText);
         });

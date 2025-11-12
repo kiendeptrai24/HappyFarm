@@ -28,15 +28,18 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
 
     public void Complete(object result = null)
     {
-        data.entityToHarvest.Harvest();
-        IsCompleted = true;
+        if(result == null)
+        {
+            data.entityToHarvest.Harvest();
+            IsCompleted = true;
+        }
         OnComplete?.Invoke();
         Debug.Log($"✅ Đã thu hoạch xong {data.entityToHarvest}");
     }
 
-    public void DisplayInfo()
+    public string DisplayInfo()
     {
-        Debug.Log($"HarvestTask → Started={IsStarted}, Completed={IsCompleted}");
+        return $"Task {NameTask} started at {data.startTime:hh:mm tt}. You can harvest it now!";
     }
 
     public void Update()
@@ -44,4 +47,5 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
         if (data.entityToHarvest.IsHarvestable() == false && IsCompleted)
             Complete();
     }
+
 }

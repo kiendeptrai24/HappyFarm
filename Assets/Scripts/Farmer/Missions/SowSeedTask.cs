@@ -38,9 +38,9 @@ public class SowSeedTask : IFarmTask<SowSeedTaskData>
         Debug.Log("✅ Gieo hạt hoàn tất!");
     }
 
-    public void DisplayInfo()
+    public string DisplayInfo()
     {
-        Debug.Log($"SowSeedTask → Started={IsStarted}, Completed={IsCompleted}");
+        return $"Task {NameTask} was created at {data.startTime:HH:mm}: a free plot is ready, go plant your crop!";
     }
 
     public void Update()
