@@ -2008,15 +2008,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cow
   data:
     name: Cow
-    growTime: 30
+    lifeCycles: 100
+    growthTime: 0
     timeToHarvest: 5
+    baseTimeToHarvest: 5
     witherDelay: 60
     yieldAmount: 1
-    lifeCycles: 100
-    price: 15
+    baseYieldAmount: 1
+    isMature: 0
   startTime: 0
   witherStartTime: 0
   matureTree: {fileID: 0}
+  meshFilter: {fileID: 0}
+  isDead: 0
 --- !u!65 &1974873555662907601
 BoxCollider:
   m_ObjectHideFlags: 0

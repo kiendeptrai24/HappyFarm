@@ -25,6 +25,7 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
         startTime = Time.time;
         inventory = FindAnyObjectByType<Inventory>();
         witherStartTime = float.MaxValue;
+        data.ApplyUpgrade(inventory.farmUpgradeData);
     }
     public void Plant(Dirt dirt)
     {
@@ -39,12 +40,12 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
             startTime = Time.time;
             startWither = false;
             witherStartTime = float.MaxValue;
+            inventory.AddFarmProduct(data);
+            OnHavested?.Invoke();
             if (data.lifeCycles <= 0)
             {
                 Died();
             }
-            inventory.AddFarmProduct(data);
-            OnHavested?.Invoke();
             return data;
         }
         return null;

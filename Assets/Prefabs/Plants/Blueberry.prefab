@@ -108,8 +108,10 @@ MonoBehaviour:
     lifeCycles: 40
     growthTime: 0
     timeToHarvest: 5
+    baseTimeToHarvest: 5
     witherDelay: 60
     yieldAmount: 1
+    baseYieldAmount: 0
     isMature: 0
   startTime: 0
   witherStartTime: 0

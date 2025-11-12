@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 [Serializable]
 public class SeedData
 {
+    public ProductBuyAble type;
     public string name;
     public int yieldAmount;
     public int price;

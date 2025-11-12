@@ -10,12 +10,12 @@ public class Plot : MonoBehaviour, IFillOnAble
     public GameObject currentObj;
     private IPlaceable placeableItem;
     public Vector3 position => transform.position;
-    public Action OnFillOnAnble { get; set; }
+    public Action<GameObject> OnFillOnAnble { get; set; }
     public Action<GameObject> OnFillOnUnable { get; set; }
 
     private void Start()
     {
-        OnFillOnAnble?.Invoke();
+        OnFillOnAnble?.Invoke(currentObj);
     }
     public void Init(int row, int col, bool hasCrop, DirtData dirtData = null)
     {
@@ -73,6 +73,6 @@ public class Plot : MonoBehaviour, IFillOnAble
         currentObj = null;
         placeableItem = null;
         plotData.hasCrop = false;
-        OnFillOnAnble?.Invoke();
+        OnFillOnAnble?.Invoke(currentObj);
     }
 }

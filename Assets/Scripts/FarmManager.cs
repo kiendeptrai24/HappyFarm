@@ -19,19 +19,24 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
     [SerializeField] private List<Plot> plots = new();
     [SerializeField] private List<PlotData> plotsToSave = new();
     [SerializeField] private List<GameObject> entites;
-    [SerializeField] private List<FarmEntity> farmEntities;
+    [SerializeField] private List<FarmEntity> baseFarmEntities;
 
     [Header("Dirt info")]
     [SerializeField] private List<IFillOnAble> landsHaveUse = new();
     [SerializeField] private List<IFillOnAble> vacantplots = new();
 
+    [Header("Planted info")]
+    [SerializeField] private List<FarmEntity> plantedEntities = new();
+
     public Action<List<IFillOnAble>, List<IFillOnAble>> OnFarmChanged;
 
-    private void Awake() {
+    private void Awake()
+    {
         SaveLoadManager.Instance.RegisterSaveLoadData(this);
         InitializeFarmPlots();
     }
-    private void Start() {
+    private void Start()
+    {
 
     }
     [ContextMenu("Initialize Farm Plots")]
@@ -53,29 +58,47 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                 farmPlots[row, col] = plot;
                 plotDatas[row, col] = plot.plotData;
 
-                farmPlots[row, col].OnFillOnUnable += (land) =>
-                {
-                    plotsToSave.Add(plot.plotData);
-                    var fillOn = land.GetComponent<IFillOnAble>();
-                    if(fillOn == null) return;
-                    fillOn.OnFillOnUnable += (source) =>
-                    {
-                        landsHaveUse.Add(fillOn);
-                        if (vacantplots.Contains(fillOn))
-                            vacantplots.Remove(fillOn);
-                        OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
-                    };
-                    fillOn.OnFillOnAnble += () =>
-                    {
-                        vacantplots.Add(fillOn);
-                        if (landsHaveUse.Contains(fillOn))
-                            landsHaveUse.Remove(fillOn);
-                        OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
-                    };
-                };
+                ApplyPlotCallback(row, col, plot);
             }
         }
     }
+
+    private void ApplyPlotCallback(int row, int col, Plot plot)
+    {
+        farmPlots[row, col].OnFillOnUnable += (land) =>
+        {
+            plotsToSave.Add(plot.plotData);
+
+            var fillOn = land.GetComponent<IFillOnAble>();
+            if (fillOn == null) return;
+            ApplyFillOnCallBack(fillOn);
+        };
+    }
+
+    private void ApplyFillOnCallBack(IFillOnAble fillOn)
+    {
+        fillOn.OnFillOnUnable += (source) =>
+        {
+            var entity = source.GetComponent<FarmEntity>();
+            if (entity != null)
+                plantedEntities.Add(entity);
+            landsHaveUse.Add(fillOn);
+            if (vacantplots.Contains(fillOn))
+                vacantplots.Remove(fillOn);
+            OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
+        };
+        fillOn.OnFillOnAnble += (source) =>
+        {
+
+            plantedEntities.RemoveAll(o => o == null);
+
+            vacantplots.Add(fillOn);
+            if (landsHaveUse.Contains(fillOn))
+                landsHaveUse.Remove(fillOn);
+            OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
+        };
+    }
+
     [ContextMenu("Clear Farm Plots")]
     private void ClearFarmPlots()
     {
@@ -113,7 +136,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
         LoadFarmEntities();
         Debug.Log(gameData.plotDatas.Count);
         try
-        {    
+        {
             foreach (var plotData in gameData.plotDatas)
             {
                 // Kiểm tra index hợp lệ
@@ -128,14 +151,14 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                 if (farmPlots[plotData.row, plotData.col] == null)
                     return;
                 farmPlots[plotData.row, plotData.col].OnFill(dirtPrefab);
-                
+
                 var dirtObj = farmPlots[plotData.row, plotData.col].currentObj.GetComponent<Dirt>();
                 // add plot data to plotsToSave
                 // create entity object
-                if(plotData.dirtData.hasEntity == true)
+                if (plotData.dirtData.hasEntity == true)
                 {
                     GameObject entityLoad = null;
-                    foreach (var entity in farmEntities)
+                    foreach (var entity in baseFarmEntities)
                     {
                         if (entity.data != null && entity.data.name == plotData.dirtData.nameOfEntiy)
                         {
@@ -143,7 +166,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                             break;
                         }
                     }
-                    if(entityLoad != null)
+                    if (entityLoad != null)
                     {
 
                         dirtObj.OnFill(entityLoad);
@@ -162,7 +185,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
     {
         foreach (var entity in entites)
         {
-            farmEntities.Add(entity.GetComponent<FarmEntity>());
+            baseFarmEntities.Add(entity.GetComponent<FarmEntity>());
         }
     }
 }

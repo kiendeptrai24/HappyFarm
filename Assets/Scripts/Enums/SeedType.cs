@@ -1,1 +1,0 @@
-public enum SeedType { None, Tomato, Blueberry, Strawberry, Pea, Rice }

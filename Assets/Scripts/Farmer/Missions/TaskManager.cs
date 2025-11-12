@@ -64,7 +64,7 @@ public class TaskManager : MonoBehaviour
 
             var harvestTask = new HarvestTask();
             harvestTask.Setup(new HarvestTaskData(entity, place.position));
-            dirt.OnFillOnAnble += () =>
+            dirt.OnFillOnAnble += (_) =>
             {
                 if (missions.Contains(harvestTask))
                 {

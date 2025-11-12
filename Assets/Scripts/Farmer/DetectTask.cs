@@ -20,7 +20,7 @@ public class DetectTask : Singleton<DetectTask>
     }
     public void AddFillOn(IFillOnAble fillOn)
     {
-        fillOn.OnFillOnAnble += () =>
+        fillOn.OnFillOnAnble += (_) =>
         {
             Resfesh();
         };

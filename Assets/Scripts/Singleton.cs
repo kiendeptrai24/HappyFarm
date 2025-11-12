@@ -14,7 +14,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             {
                 if (_instance == null)
                 {
-                    _instance = FindFirstObjectByType<T>();
+                     _instance = FindFirstObjectByType<T>();
 
                     if (_instance == null)
                     {

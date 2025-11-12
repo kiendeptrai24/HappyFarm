@@ -15,6 +15,7 @@ public class DragManager : MonoBehaviour
     [Header("LayerMask")]
     public LayerMask groundMask;
     public LayerMask canShowDataMask;
+    public LayerMask whatIsFarmEquiment;
 
 
     [Header("Input Actions")]
@@ -61,12 +62,17 @@ public class DragManager : MonoBehaviour
                 PupupShowData.Instance.Show();
             }
         }
+        if(Physics.Raycast(ray, out RaycastHit hit1, Mathf.Infinity, whatIsFarmEquiment))
+        {
+            
+        }
     }
 
     private void OnDisable()
     {
         playerInput.Drag.Disable();
         playerInput.Drag.Mouse.canceled -= OnClickCanceled;
+        playerInput.Drag.Mouse.performed -= ctx => OnClicked(ctx);
         playerInput.Drag.Position.performed -= ctx => mousePos = ctx.ReadValue<Vector2>();
     }
 

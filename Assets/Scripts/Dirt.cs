@@ -11,7 +11,7 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     public Vector2 Size => new Vector2(1, 1);
     public Vector3 position => new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
 
-    public Action OnFillOnAnble { get; set; }
+    public Action<GameObject> OnFillOnAnble { get; set; }
     public Action<GameObject> OnFillOnUnable { get; set; }
 
     public Plot plot;
@@ -28,7 +28,7 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
     {
         plot = tile;
         dirtData = plot.plotData.dirtData;
-        OnFillOnAnble?.Invoke();
+        OnFillOnAnble?.Invoke(cropObj);
     }
     public void OnRemoved() => Destroy(gameObject);
     public void OnFill(GameObject source)
@@ -65,7 +65,7 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
             return;
         }
         currentEntity = null;
-        OnFillOnAnble?.Invoke();
+        OnFillOnAnble?.Invoke(cropObj);
     }
     public bool Isfilled() => currentEntity != null;
 
