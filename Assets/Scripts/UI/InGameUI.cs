@@ -46,6 +46,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private FarmManager farmManagerData;
     [SerializeField] private TaskManager taskManagerData;
     [SerializeField] private FarmerManager farmerManager;
+    [SerializeField] private DetectTask detectTask;
 
     [SerializeField] private RectTransform contentRectTransform;
     private void Awake()
@@ -53,9 +54,13 @@ public class InGameUI : MonoBehaviour
         inventoryData.OnProductDataUpdate += OnProductDataChanged;
         inventoryData.OnSeedDataUpdate += OnSeedDataChanged;
         inventoryData.OnCoinsAndLevelUpdate += OnCointsAndLevelUpdate;
-        farmManagerData.OnFarmChanged += OnFarmChanged;
         taskManagerData.OnTaskChanged += OnTaskChanged;
         farmerManager.OnFarmerChanged += OnFarmerChanged;
+        detectTask.OnRefresh += OnFarmChanged;
+    }
+    private void OnRefesh()
+    {
+
 
         shopToggle.onValueChanged.AddListener(OnShopToggleChanged);
         inventoryToggle.onValueChanged.AddListener(OnInventoryToggleChanged);
@@ -64,12 +69,8 @@ public class InGameUI : MonoBehaviour
         animalBtn.onClick.AddListener(ShowAnimalPanel);
         updgrateBtn.onClick.AddListener(ShowUpdgratePanel);
         farmerBtn.onClick.AddListener(ShowFarmerPanel);
-
         gameDataBtn.onClick.AddListener(ShowGameDataPanel);
         taskinfoBtn.onClick.AddListener(ShowTaskInfoPanel);
-
-
-
 
         ShowDirtPanel();
         ShowGameDataPanel();

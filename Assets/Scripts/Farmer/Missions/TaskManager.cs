@@ -27,7 +27,7 @@ public class TaskManager : MonoBehaviour
 
         detectTask = GetComponent<DetectTask>();
         inventory = FindAnyObjectByType<Inventory>();
-        detectTask.OnRefresh += () =>
+        detectTask.OnRefresh += (_,_) =>
         {
             UpdateMission();
         };

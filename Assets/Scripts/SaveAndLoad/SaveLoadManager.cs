@@ -18,12 +18,10 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
     private void Start()
     {
         LoadData();
-        Debug.Log($"Save path: {savePath}");
     }
 
     private void OnDisable()
     {
-        // Gọi tất cả ISaveLoadData để cập nhật gameData trước khi save
         foreach (var save in saveLoadDatas)
         {
             save?.Save(gameData);
@@ -63,12 +61,16 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
         {
             Debug.LogWarning("⚠️ Chưa có file lưu, tạo dữ liệu mới.");
             gameData = baseGameData.Clone();
+            foreach (var saveLoadData in saveLoadDatas)
+            {
+                if (saveLoadData == null) continue;
+                saveLoadData.Load(gameData);
+            }
             return;
         }
 
         try
         {
-            Debug.Log(saveLoadDatas.Count);
             string json = File.ReadAllText(savePath);
             if (string.IsNullOrEmpty(json))
             {
@@ -79,10 +81,9 @@ public class SaveLoadManager : Singleton<SaveLoadManager>
 
             Debug.Log("📄 JSON loaded:\n" + json);
 
-            gameData = JsonConvert.DeserializeObject<GameData>(json) ?? baseGameData.Clone();;
+            gameData = JsonConvert.DeserializeObject<GameData>(json) ?? baseGameData.Clone(); ;
             Debug.Log("📂 Đã load dữ liệu game thành công!");
 
-            // Gọi tất cả ISaveLoadData để load vào runtime
             foreach (var saveLoadData in saveLoadDatas)
             {
                 if (saveLoadData == null) continue;

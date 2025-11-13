@@ -21,7 +21,6 @@ public class PupupShowData : MonoBehaviour
     [SerializeField] private Button havestButton;
     [SerializeField] private Button closeButton;
     private FarmEntity currentEnity;
-    private Farmer currentFarmer;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -52,25 +51,13 @@ public class PupupShowData : MonoBehaviour
     public void SetData(FarmEntity entity)
     {
         this.currentEnity = entity;
-        currentFarmer = null;
     }
-    public void SetFarmer(Farmer farmer)
-    {
-        this.currentFarmer = farmer;
-        currentFarmer = null;
-    }
-    public void ShowFarmer()
-    {
-        if (currentFarmer == null) return;
-        float growthPercent = Mathf.Min((Time.time - currentFarmer.startTimeTask) / currentFarmer.timeToCompletedMision, 1f);
-        growthSlider.value = growthPercent;
-    }
+
     private void Update()
     {
         if (popupPrefab.activeSelf)
         {
             Show();
-            ShowFarmer();
         }
     }
     public void Show()

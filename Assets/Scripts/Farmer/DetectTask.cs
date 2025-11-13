@@ -11,7 +11,7 @@ public class DetectTask : Singleton<DetectTask>
     public int fillOnCount;
     public int fillAbleCount;
     public int fillUnablesCount;
-    public Action OnRefresh;
+    public Action<List<IFillOnAble>,List<IFillOnAble>> OnRefresh;
     private void Start()
     {
         fillOnCount = fillOns.Count;
@@ -52,6 +52,6 @@ public class DetectTask : Singleton<DetectTask>
         fillOnCount = fillOns.Count;
         fillAbleCount = fillAbles.Count;
         fillUnablesCount = fillUnables.Count;
-        OnRefresh?.Invoke();
+        OnRefresh?.Invoke(fillAbles, fillUnables);
     }
 }

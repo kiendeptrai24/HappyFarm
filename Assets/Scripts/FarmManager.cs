@@ -32,7 +32,8 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
 
     private void Awake()
     {
-        SaveLoadManager.Instance.RegisterSaveLoadData(this);
+        SaveLoadManager saveLoadManager = FindAnyObjectByType<SaveLoadManager>();
+        saveLoadManager.RegisterSaveLoadData(this);
         InitializeFarmPlots();
     }
     private void Start()

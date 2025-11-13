@@ -24,7 +24,8 @@ public class Inventory : MonoBehaviour, ISaveLoadData
 
     private void Awake()
     {
-        SaveLoadManager.Instance.RegisterSaveLoadData(this);
+        SaveLoadManager saveLoadManager = FindAnyObjectByType<SaveLoadManager>();
+        saveLoadManager.RegisterSaveLoadData(this);
         FarmManager farmManager = FindAnyObjectByType<FarmManager>();
         farmUpgradeData = new FarmUpgradeData(farmManager);
         foreach (var entity in entities)

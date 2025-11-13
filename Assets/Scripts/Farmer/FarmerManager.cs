@@ -17,7 +17,8 @@ public class FarmerManager : Singleton<FarmerManager>, ISaveLoadData
     private void Awake()
     {
         taskManager = FindAnyObjectByType<TaskManager>();
-        SaveLoadManager.Instance.RegisterSaveLoadData(this);
+        SaveLoadManager saveLoadManager = FindAnyObjectByType<SaveLoadManager>();
+        saveLoadManager.RegisterSaveLoadData(this);
     }
     public void AddFarmer(Farmer farmer)
     {
