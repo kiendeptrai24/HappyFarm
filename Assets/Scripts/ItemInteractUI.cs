@@ -58,7 +58,7 @@ public class ItemInteractUI : MonoBehaviour,
         }
     }
 
-    private void UpdateItemUI(System.Collections.Generic.List<SeedData> seeds)
+    private void UpdateItemUI(List<SeedData> seeds)
     {
         foreach (var seed in seeds)
         {

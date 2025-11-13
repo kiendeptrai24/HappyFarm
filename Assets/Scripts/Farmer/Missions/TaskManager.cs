@@ -70,7 +70,6 @@ public class TaskManager : MonoBehaviour
             };
             entity.OnCanHasvest += () =>
             {
-                Debug.Log($"Create Harvest Task with entity" );
                 AddTask(harvestTask);
                 OnTaskChanged?.Invoke(inProgressMissions, completedMissions);
             };
@@ -151,7 +150,6 @@ public class TaskManager : MonoBehaviour
                     }
                 }
             };
-            Debug.Log($"Create sow Task with entity" );
             AddTask(sowTask);
         }
         OnTaskChanged?.Invoke(inProgressMissions, completedMissions);

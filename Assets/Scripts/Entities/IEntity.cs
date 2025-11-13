@@ -3,7 +3,7 @@
 using System;
 using UnityEngine;
 
-public interface IEntity
+public interface IEntity : IDragItemInteract
 {
     Action OnDead { get; set; }
     Action OnCanHasvest { get; set; }

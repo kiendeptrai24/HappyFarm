@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class DragManager : MonoBehaviour
 {
     public static DragManager Instance { get; private set; }
+    private Inventory inventory;
 
     [Header("Camera")]
     public Camera mainCamera;
@@ -38,6 +39,7 @@ public class DragManager : MonoBehaviour
         }
         Instance = this;
         playerInput = new PlayerInput();
+        inventory = FindAnyObjectByType<Inventory>();
 
     }
 
@@ -62,9 +64,9 @@ public class DragManager : MonoBehaviour
                 PupupShowData.Instance.Show();
             }
         }
-        if(Physics.Raycast(ray, out RaycastHit hit1, Mathf.Infinity, whatIsFarmEquiment))
+        if (Physics.Raycast(ray, out RaycastHit hit1, Mathf.Infinity, whatIsFarmEquiment))
         {
-            
+
         }
     }
 
@@ -108,6 +110,13 @@ public class DragManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask))
         {
             IFillOnAble plot = hit.collider.GetComponent<IFillOnAble>();
+            Farmer farmer = currentPrefab.GetComponent<Farmer>();
+            if (farmer != null)
+            {
+                currentGhost.transform.position = hit.point;
+                SetGhostColor(true);
+                return;
+            }
             if (plot != null && !plot.Isfilled())
             {
                 if (plot == curPlace) return;
@@ -130,10 +139,20 @@ public class DragManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundMask))
         {
-            IFillOnAble obj = hit.collider.GetComponent<IFillOnAble>();
-            if (obj != null && obj.Isfilled() == false)
+            IDragItemInteract itemInteract = currentPrefab.GetComponent<IDragItemInteract>();
+            if (itemInteract == null) return;
+
+            if (inventory.GetObj(itemInteract.Type) && itemInteract.CanSpawnAnyWhere)
             {
-                obj.OnFill(currentPrefab);
+                Instantiate(currentPrefab, hit.point, Quaternion.identity);
+            }
+            IFillOnAble obj = hit.collider.GetComponent<IFillOnAble>();
+            if (obj != null && obj.Isfilled() == false && itemInteract.CanSpawnAnyWhere == false)
+            {
+                if (inventory.GetObj(itemInteract.Type))
+                {
+                    obj.OnFill(currentPrefab);
+                }
             }
         }
         EndDrag();

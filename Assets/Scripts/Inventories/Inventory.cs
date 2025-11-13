@@ -66,6 +66,7 @@ public class Inventory : MonoBehaviour, ISaveLoadData
             seedDataBase.Remove(seedData.type.ToString());
         }
 
+        OnSeedDataUpdate?.Invoke(seedDatas);
         return entity.gameObject;
     }
 
@@ -151,6 +152,47 @@ public class Inventory : MonoBehaviour, ISaveLoadData
         {
             OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
         }
+    }
+    public bool GetObj(ShopItemType shopItemType)
+    {
+        int price = 0;
+
+        switch (shopItemType)
+        {
+            case ShopItemType.Seed:
+                price = 15;
+                break;
+            case ShopItemType.Farmer:
+                price = 15;
+                break;
+            case ShopItemType.Dirt:
+                price = 500;
+                break;
+            case ShopItemType.Animal:
+                price = 100;
+                break;
+            default:
+                return false;
+        }
+
+        // kiểm tra đủ tiền trước khi trừ
+        if (!CheckEnoughCoin(price))
+        {
+            Debug.Log("Không đủ tiền để mua " + shopItemType);
+            return false;
+        }
+        return true;
+    }
+
+    public bool CheckEnoughCoin(int monney)
+    {
+        if (coins - monney < 0)
+        {
+            return false;
+        }
+        coins -= monney;
+        OnCoinsAndLevelUpdate.Invoke(coins, farmUpgradeData.level);
+        return true;
     }
     public void Load(GameData gameData)
     {

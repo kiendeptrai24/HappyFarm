@@ -3,7 +3,7 @@ using System;
 using NUnit.Framework;
 using UnityEngine;
 
-public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
+public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble, IDragItemInteract
 {
     [Header("Dirt Info")]
     public PlaceableType Type => PlaceableType.Dirt;
@@ -13,6 +13,8 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble
 
     public Action<GameObject> OnFillOnAnble { get; set; }
     public Action<GameObject> OnFillOnUnable { get; set; }
+    ShopItemType IDragItemInteract.Type { get; set; } = ShopItemType.Dirt;
+    public bool CanSpawnAnyWhere { get; set; } = false;
 
     public Plot plot;
     public DirtData dirtData;

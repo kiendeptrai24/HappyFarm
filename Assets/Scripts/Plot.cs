@@ -44,13 +44,11 @@ public class Plot : MonoBehaviour, IFillOnAble
             var entity = source.GetComponent<FarmEntity>();
             if (entity != null)
             {
-                Debug.Log(entity.data.name);
                 plotData.dirtData.hasEntity = true;
                 plotData.dirtData.type = entity.data.type;
             }
             else
             {
-                Debug.Log(entity.data.name);
                 plotData.dirtData.hasEntity = false;
                 plotData.dirtData.type = ProductSaleAble.None;
             }

@@ -17,7 +17,9 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     public Action OnCanHasvest { get; set; }
     public Action OnHavested { get; set; }
     public Action OnDead { get; set; }
+    public abstract ShopItemType Type { get; set; }
 
+    public bool CanSpawnAnyWhere { get; set; } = false;
     public bool isDead = false;
 
     protected virtual void Start()
@@ -68,13 +70,11 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     }
     private void TreeIsMatrue()
     {
-        Debug.Log("Tree is mature");
         data.isMature = true;
         if (meshFilter != null && meshFilter.mesh != matureTree)
         {
             meshFilter.mesh = matureTree;
         }
-
     }
 
 
@@ -111,7 +111,6 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
             $"Crop: {data.name}, Life Cycles Left: {data.lifeCycles}, " +
             $"Time to Harvest Remaining: {timeRemaining:F1}s"
         );
-
     }
 
     public void SetPlantData(EntityData data)

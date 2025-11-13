@@ -3,7 +3,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-public class Farmer : MonoBehaviour
+public class Farmer : MonoBehaviour, IDragItemInteract
 {
     private FarmerMovement movement;
     [SerializeField] private Transform startPoint;
@@ -12,11 +12,18 @@ public class Farmer : MonoBehaviour
     private float startTimeMission;
     private bool isIdle = true;
     public Action isIdleChanged { get; set; }
-
+    public ShopItemType Type { get; set; } = ShopItemType.Farmer;
+    public bool CanSpawnAnyWhere { get; set; } = true;
+    private FarmerManager farmerManager;
+    private void Awake()
+    {
+        farmerManager = FarmerManager.Instance;
+        movement = GetComponent<FarmerMovement>();
+        farmerManager.AddFarmer(this);
+        farmerManager.SetUpPoint(this);
+    }
     private void Start()
     {
-        movement = GetComponent<FarmerMovement>();
-        FarmerManager.Instance.AddFarmer(this);
         if (startPoint != null)
             return;
         movement.MoveTo(startPoint.position);
@@ -34,6 +41,10 @@ public class Farmer : MonoBehaviour
         isIdleChanged?.Invoke();
         curMission = mission;
         curMission.Start();
+        if (curMission == null)
+        {
+            Debug.Log("--------------------------------");
+        }
         curMission.OnComplete += () =>
         {
             curMission = null;

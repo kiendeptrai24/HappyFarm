@@ -12,5 +12,6 @@ public enum ShopItemType
 
     Decoration,
     Booster,
-    Other
+    Other,
+    Farmer
 }

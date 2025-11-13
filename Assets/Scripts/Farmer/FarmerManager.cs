@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
+public class FarmerManager : Singleton<FarmerManager>, ISaveLoadData
 {
     private TaskManager taskManager;
     [SerializeField] private Farmer farmerPrefab;
@@ -14,11 +14,13 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
     [SerializeField] private float timeToNextTask = .01f;
     private float startTimeNextTask;
     public System.Action<int, int> OnFarmerChanged;
-    private void Awake() {
+    private void Awake()
+    {
         taskManager = FindAnyObjectByType<TaskManager>();
         SaveLoadManager.Instance.RegisterSaveLoadData(this);
     }
-    public void AddFarmer(Farmer farmer) {
+    public void AddFarmer(Farmer farmer)
+    {
         farmer.isIdleChanged += () =>
         {
             RefeshFarmer();
@@ -30,13 +32,14 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
     {
         farmers.Remove(farmer);
     }
-    private void Update() {
+    private void Update()
+    {
         if (timeToNextTask < Time.time - startTimeNextTask)
         {
             AssignTaskToFarmer();
             startTimeNextTask = Time.time;
         }
-        
+
     }
     public void AssignTaskToFarmer()
     {
@@ -61,7 +64,7 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
         }
         OnFarmerChanged?.Invoke(idlefarmers.Count, workingfarmers.Count);
     }
-
+    public void SetUpPoint(Farmer farm) => farm.SetUp(point);
     public void Save(GameData gameData)
     {
         gameData.farmAmount = farmers.Count;
@@ -76,7 +79,7 @@ public class FarmerManager : Singleton<FarmerManager> , ISaveLoadData
                 var farmer = Instantiate(farmerPrefab, point.position, Quaternion.identity);
                 farmer.SetUp(point);
             }
-            
+
         }
         catch (System.Exception ex)
         {
