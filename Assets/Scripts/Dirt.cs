@@ -24,7 +24,8 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble, IDragItemInteract
     public GameObject cropObj;
     private void Start()
     {
-        DetectTask.Instance.AddFillOn(this);
+        DetectTask detectTask = FindAnyObjectByType<DetectTask>();
+        detectTask.AddFillOn(this);
     }
     public void OnPlaced(Plot tile)
     {

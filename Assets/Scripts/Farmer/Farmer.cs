@@ -2,7 +2,6 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.AI;
 public class Farmer : MonoBehaviour, IDragItemInteract
 {
     private FarmerMovement movement;
@@ -17,7 +16,7 @@ public class Farmer : MonoBehaviour, IDragItemInteract
     private FarmerManager farmerManager;
     private void Awake()
     {
-        farmerManager = FarmerManager.Instance;
+        farmerManager = FindAnyObjectByType<FarmerManager>();
         movement = GetComponent<FarmerMovement>();
         farmerManager.AddFarmer(this);
         farmerManager.SetUpPoint(this);
