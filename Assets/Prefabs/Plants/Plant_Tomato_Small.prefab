@@ -111,7 +111,7 @@ MonoBehaviour:
     growthTime: 0
     timeToHarvest: 5
     baseGrowthTime: 0
-    baseTimeToHarvest: 0.1
+    baseTimeToHarvest: 10
     witherDelay: 60
     yieldAmount: 1
     baseYieldAmount: 1

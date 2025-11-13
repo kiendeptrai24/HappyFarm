@@ -127,13 +127,13 @@ public class ItemInteractUI : MonoBehaviour,
                 return;
             }
             if (Popup.instance.IsSale())
-                LogicSale(value, log, itemAmount);
+                LogicSale(log, itemAmount);
             else
-                LogicBuy(value, log, itemAmount);
+                LogicBuy(log, itemAmount);
         });
     }
 
-    private void LogicBuy(string value, TextMeshProUGUI log, int itemAmount)
+    private void LogicBuy(TextMeshProUGUI log, int itemAmount)
     {
         if (itemAmount * itemData.price < inventory.coins)
         {
@@ -147,7 +147,7 @@ public class ItemInteractUI : MonoBehaviour,
         }
     }
 
-    private void LogicSale(string value, TextMeshProUGUI log, int itemAmount)
+    private void LogicSale(TextMeshProUGUI log, int itemAmount)
     {
         Debug.Log(itemAmount + " " + itemSaleData.quality);
         if (itemAmount < itemSaleData.quality)

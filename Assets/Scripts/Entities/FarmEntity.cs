@@ -106,11 +106,6 @@ public abstract class FarmEntity : MonoBehaviour, IEntity
     {
         float timeElapsed = Time.time - startTime;
         float timeRemaining = Mathf.Max(data.timeToHarvest - timeElapsed, 0f);
-
-        Debug.Log(
-            $"Crop: {data.name}, Life Cycles Left: {data.lifeCycles}, " +
-            $"Time to Harvest Remaining: {timeRemaining:F1}s"
-        );
     }
 
     public void SetPlantData(EntityData data)

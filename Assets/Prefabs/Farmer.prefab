@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Farmer
   startPoint: {fileID: 0}
-  timeToCompletedMision: 10
+  timeToCompletedMision: 120
 --- !u!114 &2395434925997483370
 MonoBehaviour:
   m_ObjectHideFlags: 0

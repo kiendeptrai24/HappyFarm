@@ -144,6 +144,7 @@ public class Inventory : MonoBehaviour, ISaveLoadData
                 coins += farmProduct.price * farmProduct.quantity;
             }
             OnProductDataUpdate?.Invoke(farmProductDatas);
+            OnCoinsAndLevelUpdate?.Invoke(coins, farmUpgradeData.level);
         }
     }
     public void UpgradeFarm(int countLevel = 1)

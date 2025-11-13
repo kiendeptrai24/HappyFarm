@@ -34,6 +34,7 @@ public class FarmerManager : Singleton<FarmerManager>, ISaveLoadData
     }
     private void Update()
     {
+        if (idlefarmers.Count == 0) return;
         if (timeToNextTask < Time.time - startTimeNextTask)
         {
             AssignTaskToFarmer();
@@ -44,8 +45,7 @@ public class FarmerManager : Singleton<FarmerManager>, ISaveLoadData
     public void AssignTaskToFarmer()
     {
         var task = taskManager.GetMission();
-
-        if (task == null || idlefarmers.Count == 0) return;
+        if (task == null) return;
 
         int random = Random.Range(0, idlefarmers.Count);
         idlefarmers[random].SetTask(task);

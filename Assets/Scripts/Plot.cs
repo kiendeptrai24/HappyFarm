@@ -52,9 +52,7 @@ public class Plot : MonoBehaviour, IFillOnAble
                 plotData.dirtData.hasEntity = false;
                 plotData.dirtData.type = ProductSaleAble.None;
             }
-
         };
-
         placeableItem.OnPlaced(this);
         OnFillOnUnable?.Invoke(currentObj);
         plotData.hasCrop = true;

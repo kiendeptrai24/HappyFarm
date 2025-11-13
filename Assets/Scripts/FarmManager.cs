@@ -22,8 +22,8 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
     [SerializeField] private List<FarmEntity> baseFarmEntities;
 
     [Header("Dirt info")]
-    [SerializeField] private List<IFillOnAble> landsHaveUse = new();
-    [SerializeField] private List<IFillOnAble> vacantplots = new();
+    [SerializeField] public List<IFillOnAble> landsHaveUse = new();
+    [SerializeField] public List<IFillOnAble> vacantplots = new();
 
     [Header("Planted info")]
     [SerializeField] public List<FarmEntity> plantedEntities = new();
@@ -61,6 +61,7 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
                 ApplyPlotCallback(row, col, plot);
             }
         }
+        OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
     }
 
     private void ApplyPlotCallback(int row, int col, Plot plot)
@@ -69,32 +70,42 @@ public class FarmManager : MonoBehaviour, ISaveLoadData
         {
             plotsToSave.Add(plot.plotData);
 
-            var fillOn = land.GetComponent<IFillOnAble>();
-            if (fillOn == null) return;
-            ApplyFillOnCallBack(fillOn);
+            var dirt = land.GetComponent<IFillOnAble>();
+            if (dirt == null) return;
+            ApplyFillOnCallBack(dirt);
         };
     }
 
-    private void ApplyFillOnCallBack(IFillOnAble fillOn)
+    private void ApplyFillOnCallBack(IFillOnAble dirt)
     {
-        fillOn.OnFillOnUnable += (source) =>
+        dirt.OnFillOnUnable += (source) =>
         {
             var entity = source.GetComponent<FarmEntity>();
+
             if (entity != null)
                 plantedEntities.Add(entity);
-            landsHaveUse.Add(fillOn);
-            if (vacantplots.Contains(fillOn))
-                vacantplots.Remove(fillOn);
+
+            landsHaveUse.Add(dirt);
+
+            if (vacantplots.Contains(dirt))
+                vacantplots.Remove(dirt);
+
+
             OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
         };
-        fillOn.OnFillOnAnble += (source) =>
+
+        dirt.OnFillOnAnble += (source) =>
         {
+            var entity = source.GetComponent<FarmEntity>();
 
-            plantedEntities.RemoveAll(o => o == null);
+            if (entity != null && plantedEntities.Contains(entity))
+                plantedEntities.Remove(entity);
 
-            vacantplots.Add(fillOn);
-            if (landsHaveUse.Contains(fillOn))
-                landsHaveUse.Remove(fillOn);
+            vacantplots.Add(dirt);
+
+            if (landsHaveUse.Contains(dirt))
+                landsHaveUse.Remove(dirt);
+
             OnFarmChanged?.Invoke(vacantplots, landsHaveUse);
         };
     }

@@ -67,6 +67,8 @@ public class Dirt : MonoBehaviour, IPlaceable, IFillOnAble, IDragItemInteract
             return;
         }
         currentEntity = null;
+        dirtData.entityData = null;
+        dirtData.hasEntity = false;
         OnFillOnAnble?.Invoke(cropObj);
     }
     public bool Isfilled() => currentEntity != null;

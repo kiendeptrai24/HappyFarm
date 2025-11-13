@@ -27,7 +27,7 @@ public class SowSeedTask : IFarmTask<SowSeedTaskData>
         IsStarted = true;
         IsCompleted = false;
         OnStart?.Invoke();
-        Debug.Log($"🌱 Gieo hạt {data.seed} tại ô đất {data.dirt} Task:{NameTask}");
+        // Debug.Log($"🌱 Gieo hạt {data.seed} tại ô đất {data.dirt} Task:{NameTask}");
     }
     
     public void Complete(object result = null)
@@ -35,7 +35,7 @@ public class SowSeedTask : IFarmTask<SowSeedTaskData>
         data.dirt.OnFill(data.seed);
         IsCompleted = true;
         OnComplete?.Invoke();
-        Debug.Log("✅ Gieo hạt hoàn tất!");
+        // Debug.Log("✅ Gieo hạt hoàn tất!");
     }
 
     public string DisplayInfo()

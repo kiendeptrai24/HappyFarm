@@ -8,8 +8,8 @@ public class Farmer : MonoBehaviour, IDragItemInteract
     private FarmerMovement movement;
     [SerializeField] private Transform startPoint;
     private IFarmTaskBase curMission;
-    [SerializeField] private float timeToCompletedMision;
-    private float startTimeMission;
+    [SerializeField] public float timeToCompletedMision;
+    public float startTimeTask;
     private bool isIdle = true;
     public Action isIdleChanged { get; set; }
     public ShopItemType Type { get; set; } = ShopItemType.Farmer;
@@ -37,7 +37,7 @@ public class Farmer : MonoBehaviour, IDragItemInteract
     {
         movement.MoveTo(mission.position);
         isIdle = false;
-        startTimeMission = Time.time;
+        startTimeTask = Time.time;
         isIdleChanged?.Invoke();
         curMission = mission;
         curMission.Start();
@@ -58,7 +58,7 @@ public class Farmer : MonoBehaviour, IDragItemInteract
         if (curMission != null && curMission.IsCompleted == false)
         {
             curMission.Update();
-            if (Time.time - startTimeMission >= timeToCompletedMision)
+            if (Time.time - startTimeTask >= timeToCompletedMision)
             {
                 curMission.Complete();
             }

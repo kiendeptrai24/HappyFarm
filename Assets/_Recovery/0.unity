@@ -23357,7 +23357,7 @@ MonoBehaviour:
     validCharacters: 0123456789
     characterLimit: 3
   itemSaleData:
-    type: 2
+    type: 0
     price: 0
     quality: 0
   shopItemType: 0
@@ -31158,7 +31158,7 @@ MonoBehaviour:
     validCharacters: 1234567890
     characterLimit: 3
   itemSaleData:
-    type: 1
+    type: 0
     price: 0
     quality: 0
   shopItemType: 0
