@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
-using JetBrains.Annotations;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,11 +53,6 @@ public class InGameUI : MonoBehaviour
         taskManagerData.OnTaskChanged += OnTaskChanged;
         farmerManager.OnFarmerChanged += OnFarmerChanged;
         detectTask.OnRefresh += OnFarmChanged;
-    }
-    private void OnRefesh()
-    {
-
-
         shopToggle.onValueChanged.AddListener(OnShopToggleChanged);
         inventoryToggle.onValueChanged.AddListener(OnInventoryToggleChanged);
         DirtBtn.onClick.AddListener(ShowDirtPanel);
@@ -77,7 +68,6 @@ public class InGameUI : MonoBehaviour
         shopToggle.isOn = true;
         inventoryToggle.isOn = false;
     }
-
     private void ShowTaskInfoPanel()
     {
         taskinfoPanel.SetActive(true);
@@ -158,6 +148,7 @@ public class InGameUI : MonoBehaviour
 
     private void OnShopToggleChanged(bool active)
     {
+        Debug.Log("dsadasdasda");
         ShowPanel(shopPanel, active);
     }
     private void OnInventoryToggleChanged(bool active)

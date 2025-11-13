@@ -231,13 +231,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5616241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827de72e36f02b74a959913fd875f89f, type: 3}
+  m_Script: {fileID: 11500000, guid: 38bd1df1b4d8c6540aacf0f765112271, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadingDots
-  loadingText: {fileID: 1262319722}
-  baseText: Loading
-  maxDots: 3
-  interval: 0.2
+  m_EditorClassIdentifier: Assembly-CSharp::GameExitUI
+  exitButton: {fileID: 1335598166}
 --- !u!1 &146467890
 GameObject:
   m_ObjectHideFlags: 0

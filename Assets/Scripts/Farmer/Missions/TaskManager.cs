@@ -2,7 +2,6 @@
 //using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class TaskManager : MonoBehaviour
@@ -24,7 +23,6 @@ public class TaskManager : MonoBehaviour
     public System.Action<List<IFarmTaskBase>, List<IFarmTaskBase>> OnTaskChanged;
     private void Awake()
     {
-
         detectTask = GetComponent<DetectTask>();
         inventory = FindAnyObjectByType<Inventory>();
         detectTask.OnRefresh += (_,_) =>
@@ -41,10 +39,8 @@ public class TaskManager : MonoBehaviour
     }
     public void UpdateMission()
     {
-        Debug.Log("UpdateMission");
         SeedTask();
         HavestTask();
-        // update mission count
         inProgressMissionsCount = inProgressMissions.Count;
         completedMissionCount = completedMissions.Count;
         taskInQueue = missions.Count;
@@ -113,9 +109,6 @@ public class TaskManager : MonoBehaviour
             harvestTask.OnComplete += onComplete;
         }
     }
-
-    // -------------------------------
-    // Xử lý dọn task và entity an toàn
     private void ClearEntityWhenDies(HarvestTask harvestTask, IEntity entity)
     {
         if (harvestTask == null || entity == null) return;

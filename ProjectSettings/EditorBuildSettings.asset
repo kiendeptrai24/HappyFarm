@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuScene.unity
     guid: 8a244144de85fb447a4e95cddf9dac35
+  - enabled: 0
+    path: Assets/Scenes/LiteFarmDemoScene 1.unity
+    guid: f2e326374052905458f9db768ee857d2
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
-    guid: f2e326374052905458f9db768ee857d2
+    guid: 28c65f68edec6154b8ba0fd30f0943b3
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: 3c179849d237bb84aa9549ea5d6919aa
