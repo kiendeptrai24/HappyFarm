@@ -463,96 +463,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 25442104}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &36282884
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 36282887}
-  - component: {fileID: 36282886}
-  - component: {fileID: 36282885}
-  m_Layer: 0
-  m_Name: EventSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &36282885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36282884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
-  m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018,
-    type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
-  m_ScrollDeltaPerTick: 6
---- !u!114 &36282886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36282884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 0}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
---- !u!4 &36282887
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 36282884}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &42016698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7504,10 +7414,7 @@ MonoBehaviour:
   plots: []
   plotsToSave: []
   entites: []
-  baseFarmEntities:
-  - {fileID: 111403762743906817, guid: 196362b23cf6c7f42b498b46e62d7f4a, type: 3}
-  - {fileID: 2620630631043219531, guid: a9d4ad7c1a31b2a49b77910c6fdfaa5a, type: 3}
-  - {fileID: 86872083558486007, guid: 1392dbd2be3bbd04d8e5c57b904b42ae, type: 3}
+  baseFarmEntities: []
   plantedEntities: []
 --- !u!1001 &570638438
 PrefabInstance:
@@ -7833,7 +7740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveLoadManager
   baseGameData:
-    coins: 0
+    coins: 10000
     level: 1
     farmAmount: 1
     plotDatas:
@@ -7906,24 +7813,24 @@ MonoBehaviour:
     farmProductDatas: []
     seedDatas:
     - type: 0
-      name: Cow
-      yieldAmount: 1
-      quantity: 2
-      price: 15
-    - type: 1
-      name: Tomato
-      yieldAmount: 1
-      quantity: 10
-      price: 5
+      name: 
+      yieldAmount: 0
+      quantity: 1
+      price: 0
     - type: 2
-      name: BlueBarry
-      yieldAmount: 1
+      name: 
+      yieldAmount: 0
       quantity: 10
-      price: 8
+      price: 0
+    - type: 1
+      name: 
+      yieldAmount: 0
+      quantity: 10
+      price: 0
   gameData:
     coins: 0
-    level: 0
-    farmAmount: 0
+    level: 1
+    farmAmount: 1
     plotDatas: []
     farmProductDatas: []
     seedDatas: []
@@ -11205,7 +11112,6 @@ Transform:
   - {fileID: 1879672557}
   - {fileID: 982033226}
   - {fileID: 486096816369197672}
-  - {fileID: 974037431}
   - {fileID: 1997920970}
   - {fileID: 1798185458}
   - {fileID: 1413392561}
@@ -11921,7 +11827,7 @@ MonoBehaviour:
     m_Bits: 128
   whatIsFarmEquiment:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   ghostMat: {fileID: 2100000, guid: a2712d673e3031c45848fc4837673156, type: 2}
   invalidGhostMat: {fileID: 2100000, guid: e4c622e3569867c43abfe54084dc3d1b, type: 2}
 --- !u!4 &974037431
@@ -11933,11 +11839,11 @@ Transform:
   m_GameObject: {fileID: 974037429}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 219.694, y: 705.86005, z: -19.55}
+  m_LocalPosition: {x: 219.694, y: 705.86005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 925417225}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &975561521
 PrefabInstance:
@@ -16490,6 +16396,96 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1418271086}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1425849890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425849893}
+  - component: {fileID: 1425849892}
+  - component: {fileID: 1425849891}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1425849891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425849890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
+--- !u!114 &1425849892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425849890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1425849893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425849890}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1442197463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20752,12 +20748,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   coins: 0
   farmUpgradeData:
-    level: 1
+    level: 0
   farmProductDatas: []
   seedDatas: []
   entities:
-  - {fileID: 712763581221244047, guid: 196362b23cf6c7f42b498b46e62d7f4a, type: 3}
   - {fileID: 4558754474595304094, guid: a9d4ad7c1a31b2a49b77910c6fdfaa5a, type: 3}
+  - {fileID: 712763581221244047, guid: 196362b23cf6c7f42b498b46e62d7f4a, type: 3}
   - {fileID: 6651310731303358679, guid: 1392dbd2be3bbd04d8e5c57b904b42ae, type: 3}
 --- !u!4 &1862621673
 Transform:
@@ -25264,7 +25260,7 @@ PrefabInstance:
     - target: {fileID: 7746411992309815208, guid: 72cce15bf6009d2488cc67e299da4d0b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00079345703
+      value: -0.000061035156
       objectReference: {fileID: 0}
     - target: {fileID: 7751107828310110063, guid: 72cce15bf6009d2488cc67e299da4d0b,
         type: 3}
@@ -26187,6 +26183,7 @@ SceneRoots:
   - {fileID: 99135627}
   - {fileID: 1717993931}
   - {fileID: 925417225}
+  - {fileID: 974037431}
   - {fileID: 570449440}
   - {fileID: 1850278011}
   - {fileID: 266722945}
@@ -26195,4 +26192,4 @@ SceneRoots:
   - {fileID: 1108943399}
   - {fileID: 1083535104}
   - {fileID: 4637268844588689872}
-  - {fileID: 36282887}
+  - {fileID: 1425849893}
