@@ -52,12 +52,15 @@ public class Inventory : MonoBehaviour, ISaveLoadData
         SeedData seedData = seedDatas[randomIndex];
         if (seedData == null)
             return null;
+
         if (!farmEntities.TryGetValue(seedData.type.ToString(), out var entity) || entity == null)
             return null;
+
         if (seedData.quantity > 0)
         {
             seedData.quantity--;
         }
+
         else
         {
             seedDatas.RemoveAt(randomIndex);

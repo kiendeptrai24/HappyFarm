@@ -25,7 +25,7 @@ public class TaskManager : MonoBehaviour
     {
         detectTask = GetComponent<DetectTask>();
         inventory = FindAnyObjectByType<Inventory>();
-        detectTask.OnRefresh += (_,_) =>
+        detectTask.OnRefresh += (_, _) =>
         {
             UpdateMission();
         };
@@ -112,7 +112,6 @@ public class TaskManager : MonoBehaviour
     private void ClearEntityWhenDies(HarvestTask harvestTask, IEntity entity)
     {
         if (harvestTask == null || entity == null) return;
-        Debug.Log("ClearEntityWhenDies");
         // Dọn missions
         if (missions != null && missions.Contains(harvestTask))
         {
@@ -142,13 +141,12 @@ public class TaskManager : MonoBehaviour
     {
         foreach (var dirt in detectTask.fillAbles)
         {
-            Debug.Log("SeedTask");
             if (sowSeedSet.Contains(dirt as Dirt))
                 continue;
-            Debug.Log("SeedTask1");
+
             var seedEntity = inventory.GetRandomSeed();
             if (seedEntity == null) return;
-            Debug.Log("SeedTask2");
+
             var sowTask = new SowSeedTask();
             sowTask.Setup(new SowSeedTaskData(dirt as Dirt, seedEntity));
 
@@ -196,12 +194,6 @@ public class TaskManager : MonoBehaviour
         if (mission == null) return null;
 
         inProgressMissions.Add(missions.Dequeue());
-        // mission.OnComplete += () =>
-        // {
-        //     inProgressMissions.Remove(mission);
-        //     completedMissions.Add(mission);
-        // };
-
         return mission;
     }
 

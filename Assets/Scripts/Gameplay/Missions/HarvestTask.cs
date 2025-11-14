@@ -23,7 +23,6 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
         IsStarted = true;
         IsCompleted = false;
         OnStart?.Invoke();
-        // Debug.Log($"🌾 Bắt đầu thu hoạch {data.entityToHarvest} Task:{NameTask}");
     }
 
     public void Complete(object result = null)
@@ -34,7 +33,6 @@ public class HarvestTask : IFarmTask<HarvestTaskData>
             IsCompleted = true;
         }
         OnComplete?.Invoke();
-        // Debug.Log($"✅ Đã thu hoạch xong {data.entityToHarvest}");
     }
 
     public string DisplayInfo()
