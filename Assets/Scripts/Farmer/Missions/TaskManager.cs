@@ -138,16 +138,17 @@ public class TaskManager : MonoBehaviour
         OnTaskChanged?.Invoke(inProgressMissions, completedMissions);
     }
 
-
-
     private void SeedTask()
     {
         foreach (var dirt in detectTask.fillAbles)
         {
+            Debug.Log("SeedTask");
             if (sowSeedSet.Contains(dirt as Dirt))
                 continue;
+            Debug.Log("SeedTask1");
             var seedEntity = inventory.GetRandomSeed();
             if (seedEntity == null) return;
+            Debug.Log("SeedTask2");
             var sowTask = new SowSeedTask();
             sowTask.Setup(new SowSeedTaskData(dirt as Dirt, seedEntity));
 

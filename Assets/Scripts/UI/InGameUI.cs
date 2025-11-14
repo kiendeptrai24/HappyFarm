@@ -148,7 +148,6 @@ public class InGameUI : MonoBehaviour
 
     private void OnShopToggleChanged(bool active)
     {
-        Debug.Log("dsadasdasda");
         ShowPanel(shopPanel, active);
     }
     private void OnInventoryToggleChanged(bool active)

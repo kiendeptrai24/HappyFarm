@@ -50,13 +50,13 @@ public class Inventory : MonoBehaviour, ISaveLoadData
 
         int randomIndex = Random.Range(0, seedDatas.Count);
         SeedData seedData = seedDatas[randomIndex];
-
+        Debug.Log("GetRandomSeed");
         if (seedData == null)
             return null;
-
+        Debug.Log("GetRandomSeed1");
         if (!farmEntities.TryGetValue(seedData.type.ToString(), out var entity) || entity == null)
             return null;
-
+        Debug.Log("GetRandomSeed2");
         if (seedData.quantity > 0)
         {
             seedData.quantity--;
